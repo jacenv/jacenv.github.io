@@ -1,5 +1,2 @@
-ignoredBuiltDependencies:
-  - msw
-
 packages:
   - 'jacenv'
