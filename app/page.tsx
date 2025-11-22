@@ -12,9 +12,11 @@ import { BottomPlayer } from "@/components/bottom-player";
 import { sidebarData, Project } from "@/lib/data";
 
 export default function SpotifyPage() {
+  const [isMounted, setIsMounted] = React.useState(false);
+
   // Find the default "projects" category
   const defaultCategory =
-    sidebarData.find((c) => c.type === "projects") || sidebarData[0];
+    sidebarData.find((c) => c.id === "projects") || sidebarData[0]; // Using ID 'projects' to match data.ts
 
   const [selectedCategoryId, setSelectedCategoryId] = React.useState(
     defaultCategory.id
@@ -24,6 +26,10 @@ export default function SpotifyPage() {
     null
   );
   const [isPlaying, setIsPlaying] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const selectedCategory =
     sidebarData.find((c) => c.id === selectedCategoryId) || sidebarData[0];
@@ -49,6 +55,12 @@ export default function SpotifyPage() {
       setSelectedCategoryId(aboutCategory.id);
     }
   };
+
+  // Prevent hydration mismatch by only rendering the complex layout after mount
+  // Or simply return a loading state / simplified layout initially if critical
+  if (!isMounted) {
+    return <div className="h-screen w-full bg-black"></div>;
+  }
 
   return (
     <div className="h-screen w-full overflow-hidden bg-black text-foreground flex flex-col">
