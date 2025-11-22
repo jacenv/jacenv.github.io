@@ -51,7 +51,7 @@ export default function SpotifyPage() {
   };
 
   return (
-    <div className="h-screen w-full overflow-hidden bg-background text-foreground flex flex-col">
+    <div className="h-screen w-full overflow-hidden bg-black text-foreground flex flex-col">
       <div className="flex-1 overflow-hidden">
         <ResizablePanelGroup
           direction="horizontal"
@@ -61,7 +61,7 @@ export default function SpotifyPage() {
             defaultSize={20}
             minSize={15}
             maxSize={30}
-            className="hidden md:block min-w-[200px] bg-zinc-900/5 dark:bg-zinc-900/50 border-r"
+            className="hidden md:block min-w-[200px] bg-black border-r border-black"
           >
             <Sidebar
               categories={sidebarData}
@@ -69,8 +69,11 @@ export default function SpotifyPage() {
               onSelectCategory={setSelectedCategoryId}
             />
           </ResizablePanel>
-          <ResizableHandle withHandle className="hidden md:flex" />
-          <ResizablePanel defaultSize={80} minSize={30}>
+          <ResizableHandle
+            withHandle
+            className="hidden md:flex bg-black border-black"
+          />
+          <ResizablePanel defaultSize={80} minSize={30} className="bg-black">
             <MainContent
               category={selectedCategory}
               currentProject={currentProject}
@@ -91,22 +94,11 @@ export default function SpotifyPage() {
         />
       )}
 
-      {/* Mobile View Fallback (Simple stack for now or could use a Sheet) */}
-      <div className="md:hidden h-full flex flex-col absolute inset-0 bg-background z-50">
-        {/* Only showing if we are in mobile mode, but ResizablePanel handles hiding on md. 
-             Wait, ResizablePanel renders children. I need to hide this explicitly if standard view is active or use media queries.
-             The original code had this parallel to ResizablePanelGroup, which is fine as long as we use display:none via CSS classes.
-             The previous code had md:hidden on the wrapper div.
-          */}
-      </div>
-
-      {/* Re-implementing mobile fallback properly or relying on the resizable panel responsive classes if they work. 
-          Actually, ResizablePanelGroup handles layout. The mobile div below is for small screens.
-      */}
-      <div className="md:hidden absolute inset-0 flex flex-col bg-background z-40">
-        <div className="p-4 border-b">
+      {/* Mobile View Fallback */}
+      <div className="md:hidden absolute inset-0 flex flex-col bg-black z-40">
+        <div className="p-4 border-b border-zinc-800">
           <select
-            className="w-full p-2 rounded-md border bg-background"
+            className="w-full p-2 rounded-md border border-zinc-800 bg-zinc-900 text-white"
             value={selectedCategoryId}
             onChange={(e) => setSelectedCategoryId(e.target.value)}
           >

@@ -11,7 +11,6 @@ import {
   Maximize2,
   ListMusic
 } from "lucide-react"
-import Image from "next/image"
 import { cn } from "@/lib/utils"
 
 interface BottomPlayerProps {
@@ -24,13 +23,13 @@ export function BottomPlayer({ project, isPlaying, onPlayPause }: BottomPlayerPr
   if (!project) return null
 
   return (
-    <div className="h-20 w-full bg-zinc-900 border-t border-zinc-800 flex items-center justify-between px-4">
+    <div className="h-[90px] w-full bg-black flex items-center justify-between px-4 relative z-50">
       {/* Left: Project Info */}
       <div className="flex items-center gap-4 w-[30%] min-w-[180px]">
-        <div className="h-14 w-14 bg-zinc-800 rounded-md flex items-center justify-center overflow-hidden relative group cursor-pointer">
+        <div className="h-14 w-14 bg-zinc-800 rounded-sm flex items-center justify-center overflow-hidden relative group cursor-pointer shadow-sm">
              {/* Placeholder for project image if available, else icon */}
              <div className="absolute inset-0 flex items-center justify-center bg-zinc-800 text-zinc-400">
-                <span className="text-xs font-bold text-white">PROJECT</span>
+                <span className="text-[10px] font-bold text-white">PROJECT</span>
              </div>
         </div>
         <div className="flex flex-col justify-center overflow-hidden">
@@ -44,8 +43,8 @@ export function BottomPlayer({ project, isPlaying, onPlayPause }: BottomPlayerPr
       </div>
 
       {/* Center: Controls */}
-      <div className="flex flex-col items-center max-w-[40%] w-full gap-2">
-        <div className="flex items-center gap-6">
+      <div className="flex flex-col items-center max-w-[40%] w-full gap-1">
+        <div className="flex items-center gap-4 mb-1">
           <Button size="icon" variant="ghost" className="text-zinc-400 hover:text-white h-8 w-8">
             <Shuffle className="h-4 w-4" />
           </Button>
@@ -54,7 +53,7 @@ export function BottomPlayer({ project, isPlaying, onPlayPause }: BottomPlayerPr
           </Button>
           <Button 
             size="icon" 
-            className="bg-white text-black hover:bg-zinc-200 hover:scale-105 transition-all rounded-full h-8 w-8"
+            className="bg-white text-black hover:scale-105 transition-all rounded-full h-8 w-8"
             onClick={onPlayPause}
           >
             {isPlaying ? (
@@ -70,12 +69,13 @@ export function BottomPlayer({ project, isPlaying, onPlayPause }: BottomPlayerPr
             <Repeat className="h-4 w-4" />
           </Button>
         </div>
-        <div className="flex items-center gap-2 w-full max-w-md">
-          <span className="text-xs text-zinc-400 min-w-[32px] text-right">0:00</span>
-          <div className="h-1 w-full bg-zinc-600 rounded-full group cursor-pointer">
-             <div className="h-full w-1/3 bg-white rounded-full group-hover:bg-green-500"></div>
+        <div className="flex items-center gap-2 w-full max-w-[600px]">
+          <span className="text-xs text-zinc-400 min-w-[32px] text-right font-variant-numeric tabular-nums">0:00</span>
+          <div className="h-1 w-full bg-zinc-600 rounded-full group cursor-pointer relative">
+             <div className="h-full w-1/3 bg-white rounded-full group-hover:bg-[#1db954]"></div>
+             <div className="absolute top-1/2 left-1/3 h-3 w-3 bg-white rounded-full opacity-0 group-hover:opacity-100 -translate-y-1/2 -translate-x-1/2 shadow-md"></div>
           </div>
-          <span className="text-xs text-zinc-400 min-w-[32px]">3:45</span>
+          <span className="text-xs text-zinc-400 min-w-[32px] font-variant-numeric tabular-nums">3:45</span>
         </div>
       </div>
 
@@ -87,14 +87,13 @@ export function BottomPlayer({ project, isPlaying, onPlayPause }: BottomPlayerPr
         <Button size="icon" variant="ghost" className="text-zinc-400 hover:text-white h-8 w-8">
            <Maximize2 className="h-4 w-4" />
         </Button>
-        <div className="flex items-center gap-2 w-32">
-          <Volume2 className="h-4 w-4 text-zinc-400" />
-          <div className="h-1 w-full bg-zinc-600 rounded-full cursor-pointer">
-             <div className="h-full w-3/4 bg-white rounded-full hover:bg-green-500"></div>
+        <div className="flex items-center gap-2 w-24 group">
+          <Volume2 className="h-4 w-4 text-zinc-400 hover:text-white cursor-pointer" />
+          <div className="h-1 w-full bg-zinc-600 rounded-full cursor-pointer relative">
+             <div className="h-full w-3/4 bg-white rounded-full group-hover:bg-[#1db954]"></div>
           </div>
         </div>
       </div>
     </div>
   )
 }
-
