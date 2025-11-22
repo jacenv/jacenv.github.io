@@ -1,65 +1,139 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import * as React from "react";
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "@/components/ui/resizable";
+import { Sidebar } from "@/components/sidebar";
+import { MainContent } from "@/components/main-content";
+import { BottomPlayer } from "@/components/bottom-player";
+import { sidebarData, Project } from "@/lib/data";
+
+export default function SpotifyPage() {
+  // Find the default "projects" category
+  const defaultCategory =
+    sidebarData.find((c) => c.type === "projects") || sidebarData[0];
+
+  const [selectedCategoryId, setSelectedCategoryId] = React.useState(
+    defaultCategory.id
+  );
+
+  const [currentProject, setCurrentProject] = React.useState<Project | null>(
+    null
+  );
+  const [isPlaying, setIsPlaying] = React.useState(false);
+
+  const selectedCategory =
+    sidebarData.find((c) => c.id === selectedCategoryId) || sidebarData[0];
+
+  const handlePlay = (project: Project) => {
+    if (currentProject?.id === project.id) {
+      setIsPlaying(!isPlaying);
+    } else {
+      setCurrentProject(project);
+      setIsPlaying(true);
+    }
+  };
+
+  const handlePlayPause = () => {
+    if (currentProject) {
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  const handleNavigateToAbout = () => {
+    const aboutCategory = sidebarData.find((c) => c.id === "about");
+    if (aboutCategory) {
+      setSelectedCategoryId(aboutCategory.id);
+    }
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            Hello from the page.tsx file
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            hello my name is jacen and i am a software engineer{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              jacens.me
-            </a>{" "}
-            jacenv.github.io{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              or maybe the nothing
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="h-screen w-full overflow-hidden bg-background text-foreground flex flex-col">
+      <div className="flex-1 overflow-hidden">
+        <ResizablePanelGroup
+          direction="horizontal"
+          className="h-full items-stretch"
+        >
+          <ResizablePanel
+            defaultSize={20}
+            minSize={15}
+            maxSize={30}
+            className="hidden md:block min-w-[200px] bg-zinc-900/5 dark:bg-zinc-900/50 border-r"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+            <Sidebar
+              categories={sidebarData}
+              selectedCategoryId={selectedCategoryId}
+              onSelectCategory={setSelectedCategoryId}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          </ResizablePanel>
+          <ResizableHandle withHandle className="hidden md:flex" />
+          <ResizablePanel defaultSize={80} minSize={30}>
+            <MainContent
+              category={selectedCategory}
+              currentProject={currentProject}
+              isPlaying={isPlaying}
+              onPlay={handlePlay}
+              onNavigateToAbout={handleNavigateToAbout}
+            />
+          </ResizablePanel>
+        </ResizablePanelGroup>
+      </div>
+
+      {/* Bottom Player */}
+      {currentProject && (
+        <BottomPlayer
+          project={currentProject}
+          isPlaying={isPlaying}
+          onPlayPause={handlePlayPause}
+        />
+      )}
+
+      {/* Mobile View Fallback (Simple stack for now or could use a Sheet) */}
+      <div className="md:hidden h-full flex flex-col absolute inset-0 bg-background z-50">
+        {/* Only showing if we are in mobile mode, but ResizablePanel handles hiding on md. 
+             Wait, ResizablePanel renders children. I need to hide this explicitly if standard view is active or use media queries.
+             The original code had this parallel to ResizablePanelGroup, which is fine as long as we use display:none via CSS classes.
+             The previous code had md:hidden on the wrapper div.
+          */}
+      </div>
+
+      {/* Re-implementing mobile fallback properly or relying on the resizable panel responsive classes if they work. 
+          Actually, ResizablePanelGroup handles layout. The mobile div below is for small screens.
+      */}
+      <div className="md:hidden absolute inset-0 flex flex-col bg-background z-40">
+        <div className="p-4 border-b">
+          <select
+            className="w-full p-2 rounded-md border bg-background"
+            value={selectedCategoryId}
+            onChange={(e) => setSelectedCategoryId(e.target.value)}
           >
-            Documentation
-          </a>
+            {sidebarData.map((c) => (
+              <option key={c.id} value={c.id}>
+                {c.name}
+              </option>
+            ))}
+          </select>
         </div>
-      </main>
+        <div className="flex-1 overflow-hidden">
+          <MainContent
+            category={selectedCategory}
+            currentProject={currentProject}
+            isPlaying={isPlaying}
+            onPlay={handlePlay}
+            onNavigateToAbout={handleNavigateToAbout}
+          />
+        </div>
+        {currentProject && (
+          <BottomPlayer
+            project={currentProject}
+            isPlaying={isPlaying}
+            onPlayPause={handlePlayPause}
+          />
+        )}
+      </div>
     </div>
   );
 }
