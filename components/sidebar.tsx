@@ -11,7 +11,8 @@ interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export function Sidebar({ className, categories, selectedCategoryId, onSelectCategory }: SidebarProps) {
-  const projectCategories = categories.filter(c => c.type === 'projects')
+  // Filter out "About Me" because it's accessed via profile
+  const sidebarPlaylists = categories.filter(c => c.type === 'playlist')
 
   return (
     <div className={cn("pb-12 h-full bg-[#121212] text-zinc-400", className)}>
@@ -58,7 +59,7 @@ export function Sidebar({ className, categories, selectedCategoryId, onSelectCat
                       </span>
                    </div>
                </Button>
-               {projectCategories.map((category) => (
+               {sidebarPlaylists.map((category) => (
                  <Button
                    key={category.id}
                    variant="ghost"
@@ -73,7 +74,7 @@ export function Sidebar({ className, categories, selectedCategoryId, onSelectCat
                    </div>
                    <div className="flex flex-col items-start overflow-hidden">
                       <span className={cn("font-medium truncate w-full", selectedCategoryId === category.id ? "text-green-500" : "text-white")}>{category.name}</span>
-                      <span className="text-xs text-zinc-400">Project • Jacen Salvador</span>
+                      <span className="text-xs text-zinc-400">Playlist • Jacen Salvador</span>
                    </div>
                  </Button>
                ))}
