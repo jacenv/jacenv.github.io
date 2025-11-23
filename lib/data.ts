@@ -203,10 +203,12 @@ export const sidebarData: Category[] = [
     name: "About Me",
     icon: User,
     type: "about",
-    content: `Computer Science student at San Diego State University (Expected June 2026) with a strong foundation in data structures, algorithms, and system design. Experienced building full-stack and mobile applications using TypeScript, React Native, Next.js, and Convex. Passionate about creating scalable, high-performance systems, strong UI/UX, and modern cloud infrastructure.
+    content: `About me:
+    Computer Science student at San Diego State University (June 2026). Has experience building full-stack and mobile applications using TypeScript, React Native, Next.js, and Convex. Passionate about creating scalable, high-performance systems, strong UI/UX, and modern cloud infrastructure.
 
 Education:
 San Diego State University - Computer Science, B.S. in Applied Arts and Sciences.
-Relevant Coursework: Data Structures & Algorithms, Database Theory Implementation, UNIX System Administration, Operating Systems, Computer Architecture, Advanced Programming Languages, Artificial Intelligence.`,
+
+Anything else you want to know (resume, projects, etc.)? Send an email!`,
   },
 ];
