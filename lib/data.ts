@@ -144,24 +144,24 @@ export const contactData: Project[] = [
 export const interestsData: Project[] = [
   {
     id: "int-1",
-    title: "Music Production",
-    description: "Creating beats and mixing tracks in my free time.",
-    tags: ["Music"],
-    date: "Hobby",
+    title: "Bouldering",
+    description: "Certified V5 Mesa Rim Climber",
+    tags: ["Outdoor"],
+    date: "Activity",
   },
   {
     id: "int-2",
-    title: "Open Source",
-    description: "Contributing to developer tools and community projects.",
-    tags: ["Coding"],
-    date: "Community",
+    title: "Volleyball",
+    description: "Greatest Outside Hitter of All Time",
+    tags: ["Indoor"],
+    date: "Activity",
   },
   {
     id: "int-3",
-    title: "System Administration",
-    description: "Experimenting with home labs and virtualization.",
-    tags: ["Homelab"],
-    date: "Tech",
+    title: "Traveling",
+    description: "Current favorite destination: Tokyo, Japan",
+    tags: ["Flying"],
+    date: "Hobby",
   },
 ];
 
