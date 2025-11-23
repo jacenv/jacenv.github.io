@@ -152,7 +152,7 @@ export const interestsData: Project[] = [
   {
     id: "int-2",
     title: "Volleyball",
-    description: "Greatest Outside Hitter of All Time",
+    description: "Open Gym Warrior, 40 inch vert",
     tags: ["Indoor"],
     date: "Activity",
   },
