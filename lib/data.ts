@@ -134,9 +134,9 @@ export const contactData: Project[] = [
   {
     id: "contact-4",
     title: "Phone",
-    description: "+1 619 207 9455",
+    description: "email first :)",
     tags: ["Mobile"],
-    link: "tel:+16192079455",
+    link: "tel:check the email",
     date: "Call",
   },
 ];
