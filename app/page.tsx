@@ -8,19 +8,15 @@ import {
 } from "@/components/ui/resizable";
 import { Sidebar } from "@/components/sidebar";
 import { MainContent } from "@/components/main-content";
+import { HomeContent } from "@/components/home-content";
 import { BottomPlayer } from "@/components/bottom-player";
-import { sidebarData, Project } from "@/lib/data";
+import { sidebarData, projectsData, Project } from "@/lib/data";
 
 export default function SpotifyPage() {
   const [isMounted, setIsMounted] = React.useState(false);
 
-  // Find the default "projects" category
-  const defaultCategory =
-    sidebarData.find((c) => c.id === "projects") || sidebarData[0]; // Using ID 'projects' to match data.ts
-
-  const [selectedCategoryId, setSelectedCategoryId] = React.useState(
-    defaultCategory.id
-  );
+  // Default to 'home' view
+  const [selectedCategoryId, setSelectedCategoryId] = React.useState("home");
 
   const [currentProject, setCurrentProject] = React.useState<Project | null>(
     null
@@ -31,8 +27,8 @@ export default function SpotifyPage() {
     setIsMounted(true);
   }, []);
 
-  const selectedCategory =
-    sidebarData.find((c) => c.id === selectedCategoryId) || sidebarData[0];
+  // Determine which category is selected (if any), for MainContent
+  const selectedCategory = sidebarData.find((c) => c.id === selectedCategoryId);
 
   const handlePlay = (project: Project) => {
     if (currentProject?.id === project.id) {
@@ -56,8 +52,6 @@ export default function SpotifyPage() {
     }
   };
 
-  // Prevent hydration mismatch by only rendering the complex layout after mount
-  // Or simply return a loading state / simplified layout initially if critical
   if (!isMounted) {
     return <div className="h-screen w-full bg-black"></div>;
   }
@@ -86,13 +80,25 @@ export default function SpotifyPage() {
             className="hidden md:flex bg-black border-black"
           />
           <ResizablePanel defaultSize={80} minSize={30} className="bg-black">
-            <MainContent
-              category={selectedCategory}
-              currentProject={currentProject}
-              isPlaying={isPlaying}
-              onPlay={handlePlay}
-              onNavigateToAbout={handleNavigateToAbout}
-            />
+            {selectedCategoryId === "home" ? (
+              <HomeContent
+                playlists={sidebarData}
+                projects={projectsData}
+                onSelectCategory={setSelectedCategoryId}
+                onNavigateToAbout={handleNavigateToAbout}
+                onPlay={handlePlay}
+                currentProject={currentProject}
+                isPlaying={isPlaying}
+              />
+            ) : selectedCategory ? (
+              <MainContent
+                category={selectedCategory}
+                currentProject={currentProject}
+                isPlaying={isPlaying}
+                onPlay={handlePlay}
+                onNavigateToAbout={handleNavigateToAbout}
+              />
+            ) : null}
           </ResizablePanel>
         </ResizablePanelGroup>
       </div>
@@ -114,6 +120,7 @@ export default function SpotifyPage() {
             value={selectedCategoryId}
             onChange={(e) => setSelectedCategoryId(e.target.value)}
           >
+            <option value="home">Home</option>
             {sidebarData.map((c) => (
               <option key={c.id} value={c.id}>
                 {c.name}
@@ -122,13 +129,25 @@ export default function SpotifyPage() {
           </select>
         </div>
         <div className="flex-1 overflow-hidden">
-          <MainContent
-            category={selectedCategory}
-            currentProject={currentProject}
-            isPlaying={isPlaying}
-            onPlay={handlePlay}
-            onNavigateToAbout={handleNavigateToAbout}
-          />
+          {selectedCategoryId === "home" ? (
+            <HomeContent
+              playlists={sidebarData}
+              projects={projectsData}
+              onSelectCategory={setSelectedCategoryId}
+              onNavigateToAbout={handleNavigateToAbout}
+              onPlay={handlePlay}
+              currentProject={currentProject}
+              isPlaying={isPlaying}
+            />
+          ) : selectedCategory ? (
+            <MainContent
+              category={selectedCategory}
+              currentProject={currentProject}
+              isPlaying={isPlaying}
+              onPlay={handlePlay}
+              onNavigateToAbout={handleNavigateToAbout}
+            />
+          ) : null}
         </div>
         {currentProject && (
           <BottomPlayer

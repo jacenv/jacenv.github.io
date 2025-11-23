@@ -19,7 +19,14 @@ export function Sidebar({ className, categories, selectedCategoryId, onSelectCat
       <div className="space-y-4 py-4 h-full flex flex-col">
         <div className="px-4 py-2 bg-[#121212] rounded-lg mb-2 mx-2">
           <div className="space-y-1">
-             <Button variant="ghost" className="w-full justify-start font-bold text-zinc-400 hover:text-white hover:bg-transparent pl-0 text-base transition-colors duration-200">
+             <Button 
+                variant="ghost" 
+                className={cn(
+                    "w-full justify-start font-bold hover:text-white hover:bg-transparent pl-0 text-base transition-colors duration-200",
+                    selectedCategoryId === 'home' ? "text-white" : "text-zinc-400"
+                )}
+                onClick={() => onSelectCategory('home')}
+             >
                 <svg role="img" height="24" width="24" aria-hidden="true" viewBox="0 0 24 24" className="mr-4 fill-current"><path d="M12.5 3.247a1 1 0 0 0-1 0L4 7.577V20h4.5v-6a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v6H20V7.577l-7.5-4.33zm-2-1.732a3 3 0 0 1 3 0l7.5 4.33a2 2 0 0 1 1 1.732V21a1 1 0 0 1-1 1h-6.5a1 1 0 0 1-1-1v-6h-3v6a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7.577a2 2 0 0 1 1-1.732l7.5-4.33z"></path></svg>
                 Home
              </Button>
@@ -48,7 +55,11 @@ export function Sidebar({ className, categories, selectedCategoryId, onSelectCat
 
           <ScrollArea className="flex-1 px-2">
             <div className="space-y-1 p-2">
-               <Button variant="ghost" className="w-full justify-start font-normal text-zinc-400 hover:text-white hover:bg-[#1a1a1a] h-16">
+               <Button 
+                 variant="ghost" 
+                 className="w-full justify-start font-normal text-zinc-400 hover:text-white hover:bg-[#1a1a1a] h-16"
+                 onClick={() => window.open("https://open.spotify.com/user/faexty?si=c063df1d3f2d4075", "_blank")}
+               >
                    <div className="h-12 w-12 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-md mr-3 flex items-center justify-center flex-shrink-0">
                      <Library className="h-6 w-6 text-white" />
                    </div>
