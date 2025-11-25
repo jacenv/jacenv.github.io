@@ -98,7 +98,7 @@ export function Sidebar({
                   )
                 }
               >
-                <div className="h-12 w-12 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-md mr-3 flex items-center justify-center flex-shrink-0">
+                <div className="h-12 w-12 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-md mr-2 flex items-center justify-center flex-shrink-0">
                   <Library className="h-6 w-6 text-white" />
                 </div>
                 <div className="flex flex-col items-start overflow-hidden">
@@ -122,7 +122,7 @@ export function Sidebar({
                   )}
                   onClick={() => onSelectCategory(category.id)}
                 >
-                  <div className="h-12 w-12 bg-[#282828] rounded-md mr-3 flex items-center justify-center flex-shrink-0">
+                  <div className="h-12 w-12 bg-[#282828] rounded-md mr-2 flex items-center justify-center flex-shrink-0">
                     <category.icon className="h-6 w-6 text-zinc-400" />
                   </div>
                   <div className="flex flex-col items-start overflow-hidden">
