@@ -11,7 +11,7 @@ interface HomeContentProps {
   projects: Project[]
   onSelectCategory: (id: string) => void
   onNavigateToAbout: () => void
-  onPlay: (project: Project) => void
+  onPlay: (project: Project, queue?: Project[]) => void
   currentProject: Project | null
   isPlaying: boolean
 }
@@ -88,7 +88,7 @@ export function HomeContent({
                         <div 
                             key={project.id} 
                             className="group bg-[#181818] hover:bg-[#282828] transition-colors p-4 rounded-md cursor-pointer flex flex-col gap-3 relative"
-                            onClick={() => onPlay(project)}
+                            onClick={() => onPlay(project, projects)}
                         >
                             <div className="relative aspect-square w-full bg-zinc-800 rounded-md overflow-hidden shadow-lg mb-1">
                                 {/* Placeholder image */}
@@ -158,4 +158,3 @@ export function HomeContent({
     </div>
   )
 }
-

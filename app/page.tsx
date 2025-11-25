@@ -9,6 +9,7 @@ import {
 import { Sidebar } from "@/components/sidebar";
 import { MainContent } from "@/components/main-content";
 import { HomeContent } from "@/components/home-content";
+import { LikedSongsContent } from "@/components/liked-songs-content";
 import { BottomPlayer } from "@/components/bottom-player";
 import { sidebarData, projectsData, Project } from "@/lib/data";
 
@@ -23,6 +24,13 @@ export default function SpotifyPage() {
   );
   const [isPlaying, setIsPlaying] = React.useState(false);
 
+  // Player State
+  const [queue, setQueue] = React.useState<Project[]>([]);
+  const [isShuffling, setIsShuffling] = React.useState(false);
+  const [repeatMode, setRepeatMode] = React.useState<"off" | "all" | "one">(
+    "off"
+  );
+
   React.useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -30,12 +38,15 @@ export default function SpotifyPage() {
   // Determine which category is selected (if any), for MainContent
   const selectedCategory = sidebarData.find((c) => c.id === selectedCategoryId);
 
-  const handlePlay = (project: Project) => {
+  const handlePlay = (project: Project, newQueue?: Project[]) => {
     if (currentProject?.id === project.id) {
       setIsPlaying(!isPlaying);
     } else {
       setCurrentProject(project);
       setIsPlaying(true);
+      if (newQueue) {
+        setQueue(newQueue);
+      }
     }
   };
 
@@ -43,6 +54,92 @@ export default function SpotifyPage() {
     if (currentProject) {
       setIsPlaying(!isPlaying);
     }
+  };
+
+  const handleNext = () => {
+    if (!currentProject || queue.length === 0) return;
+
+    const currentIndex = queue.findIndex((p) => p.id === currentProject.id);
+    
+    if (isShuffling) {
+      // Pick a random song from the queue that isn't the current one (unless queue length is 1)
+      if (queue.length === 1) {
+          // If only 1 song, just restart it if needed or do nothing
+          return;
+      }
+      let nextIndex = Math.floor(Math.random() * queue.length);
+      while (nextIndex === currentIndex) {
+          nextIndex = Math.floor(Math.random() * queue.length);
+      }
+      setCurrentProject(queue[nextIndex]);
+      setIsPlaying(true);
+      return;
+    }
+
+    if (currentIndex === -1) {
+        // Current song not in queue? just play first
+        setCurrentProject(queue[0]);
+        setIsPlaying(true);
+        return;
+    }
+
+    if (currentIndex < queue.length - 1) {
+      setCurrentProject(queue[currentIndex + 1]);
+      setIsPlaying(true);
+    } else {
+      // End of queue
+      if (repeatMode === "all") {
+        setCurrentProject(queue[0]);
+        setIsPlaying(true);
+      } else {
+        // If repeat is off, maybe stop playing or just do nothing. Spotify usually stops.
+        setIsPlaying(false);
+        setCurrentProject(null);
+      }
+    }
+  };
+
+  const handlePrevious = () => {
+    if (!currentProject || queue.length === 0) return;
+
+    const currentIndex = queue.findIndex((p) => p.id === currentProject.id);
+    
+    // Usually previous goes to beginning of song if played for > 3s, but we don't track progress yet.
+    // Let's just go to previous song.
+
+    if (isShuffling) {
+       // In shuffle mode, previous usually goes to previously played song in history.
+       // We don't track history yet. Let's just pick random for now or do nothing.
+       // Better: Go to previous in original list just for simplicity? Or just random.
+       // Standard behavior: Go back in history.
+       // Simplified behavior: Random.
+       handleNext(); // Re-use random logic for now as we don't have history.
+       return;
+    }
+
+    if (currentIndex > 0) {
+      setCurrentProject(queue[currentIndex - 1]);
+      setIsPlaying(true);
+    } else {
+       // Start of queue
+       if (repeatMode === "all") {
+           setCurrentProject(queue[queue.length - 1]);
+           setIsPlaying(true);
+       } else {
+           // Restart current song?
+           // For now, just do nothing if at start.
+       }
+    }
+  };
+
+  const handleShuffle = () => {
+    setIsShuffling(!isShuffling);
+  };
+
+  const handleRepeat = () => {
+    if (repeatMode === "off") setRepeatMode("all");
+    else if (repeatMode === "all") setRepeatMode("one");
+    else setRepeatMode("off");
   };
 
   const handleNavigateToAbout = () => {
@@ -90,6 +187,13 @@ export default function SpotifyPage() {
                 currentProject={currentProject}
                 isPlaying={isPlaying}
               />
+            ) : selectedCategoryId === "liked" ? (
+              <LikedSongsContent
+                currentProject={currentProject}
+                isPlaying={isPlaying}
+                onPlay={handlePlay}
+                onNavigateToAbout={handleNavigateToAbout}
+              />
             ) : selectedCategory ? (
               <MainContent
                 category={selectedCategory}
@@ -108,6 +212,12 @@ export default function SpotifyPage() {
         project={currentProject}
         isPlaying={isPlaying}
         onPlayPause={handlePlayPause}
+        onNext={handleNext}
+        onPrevious={handlePrevious}
+        onShuffle={handleShuffle}
+        onRepeat={handleRepeat}
+        isShuffling={isShuffling}
+        repeatMode={repeatMode}
       />
 
       {/* Mobile View Fallback */}
@@ -119,6 +229,7 @@ export default function SpotifyPage() {
             onChange={(e) => setSelectedCategoryId(e.target.value)}
           >
             <option value="home">Home</option>
+            <option value="liked">Liked Songs</option>
             {sidebarData.map((c) => (
               <option key={c.id} value={c.id}>
                 {c.name}
@@ -137,6 +248,13 @@ export default function SpotifyPage() {
               currentProject={currentProject}
               isPlaying={isPlaying}
             />
+          ) : selectedCategoryId === "liked" ? (
+            <LikedSongsContent
+              currentProject={currentProject}
+              isPlaying={isPlaying}
+              onPlay={handlePlay}
+              onNavigateToAbout={handleNavigateToAbout}
+            />
           ) : selectedCategory ? (
             <MainContent
               category={selectedCategory}
@@ -151,6 +269,12 @@ export default function SpotifyPage() {
           project={currentProject}
           isPlaying={isPlaying}
           onPlayPause={handlePlayPause}
+          onNext={handleNext}
+          onPrevious={handlePrevious}
+          onShuffle={handleShuffle}
+          onRepeat={handleRepeat}
+          isShuffling={isShuffling}
+          repeatMode={repeatMode}
         />
       </div>
     </div>

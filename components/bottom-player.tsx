@@ -10,6 +10,7 @@ import {
   Volume2,
   Maximize2,
   ListMusic,
+  Repeat1,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -20,12 +21,24 @@ interface BottomPlayerProps {
   project: Project | null;
   isPlaying: boolean;
   onPlayPause: () => void;
+  onNext: () => void;
+  onPrevious: () => void;
+  onShuffle: () => void;
+  onRepeat: () => void;
+  isShuffling: boolean;
+  repeatMode: "off" | "all" | "one";
 }
 
 export function BottomPlayer({
   project,
   isPlaying,
   onPlayPause,
+  onNext,
+  onPrevious,
+  onShuffle,
+  onRepeat,
+  isShuffling,
+  repeatMode,
 }: BottomPlayerProps) {
   const [progress, setProgress] = React.useState([0]);
   const [volume, setVolume] = React.useState([75]);
@@ -154,7 +167,11 @@ export function BottomPlayer({
           <Button
             size="icon"
             variant="ghost"
-            className="text-zinc-400 hover:text-white h-8 w-8"
+            className={cn(
+              "text-zinc-400 hover:text-white h-8 w-8 transition-colors",
+              isShuffling && "text-green-500 hover:text-green-400"
+            )}
+            onClick={onShuffle}
           >
             <Shuffle className="h-4 w-4" />
           </Button>
@@ -162,6 +179,7 @@ export function BottomPlayer({
             size="icon"
             variant="ghost"
             className="text-zinc-400 hover:text-white h-8 w-8"
+            onClick={onPrevious}
           >
             <SkipBack className="h-5 w-5 fill-current" />
           </Button>
@@ -180,15 +198,24 @@ export function BottomPlayer({
             size="icon"
             variant="ghost"
             className="text-zinc-400 hover:text-white h-8 w-8"
+            onClick={onNext}
           >
             <SkipForward className="h-5 w-5 fill-current" />
           </Button>
           <Button
             size="icon"
             variant="ghost"
-            className="text-zinc-400 hover:text-white h-8 w-8"
+            className={cn(
+              "text-zinc-400 hover:text-white h-8 w-8 transition-colors",
+              repeatMode !== "off" && "text-green-500 hover:text-green-400"
+            )}
+            onClick={onRepeat}
           >
-            <Repeat className="h-4 w-4" />
+            {repeatMode === "one" ? (
+              <Repeat1 className="h-4 w-4" />
+            ) : (
+              <Repeat className="h-4 w-4" />
+            )}
           </Button>
         </div>
         <div className="flex items-center gap-2 w-full max-w-[600px]">

@@ -10,7 +10,7 @@ interface MainContentProps {
   category: Category
   currentProject: Project | null
   isPlaying: boolean
-  onPlay: (project: Project) => void
+  onPlay: (project: Project, queue?: Project[]) => void
   onNavigateToAbout: () => void
 }
 
@@ -24,6 +24,10 @@ export function MainContent({ category, currentProject, isPlaying, onPlay, onNav
   }
   
   const headers = getHeaders()
+
+  const handlePlay = (project: Project) => {
+      onPlay(project, category.projects);
+  }
 
   return (
     <div className="h-full relative bg-[#121212] rounded-lg overflow-hidden ml-2 my-2 mr-2">
@@ -71,7 +75,7 @@ export function MainContent({ category, currentProject, isPlaying, onPlay, onNav
                         <Button 
                             size="icon" 
                             className="h-14 w-14 rounded-full shadow-lg bg-[#1ed760] hover:bg-[#1fdf64] hover:scale-105 transition-all text-black border-0"
-                            onClick={() => category.projects && category.projects.length > 0 && onPlay(category.projects[0])}
+                            onClick={() => category.projects && category.projects.length > 0 && handlePlay(category.projects[0])}
                         >
                         {isPlaying && category.projects?.some(p => p.id === currentProject?.id) ? (
                                 <Pause className="h-6 w-6 fill-black stroke-black" />
@@ -101,7 +105,7 @@ export function MainContent({ category, currentProject, isPlaying, onPlay, onNav
                             <div
                             key={project.id}
                             className="group grid grid-cols-[16px_4fr_3fr_2fr_minmax(50px,1fr)] gap-4 rounded-md px-4 py-2 text-sm transition-colors hover:bg-white/10 items-center relative"
-                            onDoubleClick={() => onPlay(project)}
+                            onDoubleClick={() => handlePlay(project)}
                             >
                             <div className="font-medium text-zinc-400 group-hover:text-white w-4 flex justify-center">
                                 <span className={cn("group-hover:hidden", currentProject?.id === project.id && isPlaying && "text-green-500")}>{i + 1}</span>
@@ -109,7 +113,7 @@ export function MainContent({ category, currentProject, isPlaying, onPlay, onNav
                                     size="icon" 
                                     variant="ghost" 
                                     className="h-6 w-6 hidden group-hover:flex p-0 hover:bg-transparent text-white"
-                                    onClick={() => onPlay(project)}
+                                    onClick={() => handlePlay(project)}
                                 >
                                     {currentProject?.id === project.id && isPlaying ? (
                                         <Pause className="h-4 w-4 fill-current" />

@@ -90,13 +90,11 @@ export function Sidebar({
             <div className="space-y-1 p-2">
               <Button
                 variant="ghost"
-                className="w-full justify-start text-left font-normal text-zinc-400 hover:text-white hover:bg-[#1a1a1a] h-16 px-2"
-                onClick={() =>
-                  window.open(
-                    "https://open.spotify.com/user/faexty?si=c063df1d3f2d4075",
-                    "_blank"
-                  )
-                }
+                className={cn(
+                  "w-full justify-start text-left font-normal text-zinc-400 hover:text-white hover:bg-[#1a1a1a] h-16 px-2",
+                  selectedCategoryId === "liked" && "bg-[#1a1a1a] text-white"
+                )}
+                onClick={() => onSelectCategory("liked")}
               >
                 <div className="h-12 w-12 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-md mr-2 flex items-center justify-center flex-shrink-0">
                   <Library className="h-6 w-6 text-white" />
