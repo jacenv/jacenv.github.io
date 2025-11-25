@@ -103,14 +103,12 @@ export default function SpotifyPage() {
         </ResizablePanelGroup>
       </div>
 
-      {/* Bottom Player */}
-      {currentProject && (
-        <BottomPlayer
-          project={currentProject}
-          isPlaying={isPlaying}
-          onPlayPause={handlePlayPause}
-        />
-      )}
+      {/* Bottom Player - Always Rendered */}
+      <BottomPlayer
+        project={currentProject}
+        isPlaying={isPlaying}
+        onPlayPause={handlePlayPause}
+      />
 
       {/* Mobile View Fallback */}
       <div className="md:hidden absolute inset-0 flex flex-col bg-black z-40">
@@ -149,13 +147,11 @@ export default function SpotifyPage() {
             />
           ) : null}
         </div>
-        {currentProject && (
-          <BottomPlayer
-            project={currentProject}
-            isPlaying={isPlaying}
-            onPlayPause={handlePlayPause}
-          />
-        )}
+        <BottomPlayer
+          project={currentProject}
+          isPlaying={isPlaying}
+          onPlayPause={handlePlayPause}
+        />
       </div>
     </div>
   );
