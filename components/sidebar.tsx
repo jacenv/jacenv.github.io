@@ -107,7 +107,7 @@ export function Sidebar({
                   </span>
                   <span className="text-xs text-zinc-400 flex items-center">
                     <span className="text-green-500 -rotate-45 mr-1">📌</span>{" "}
-                    Playlist • 123 songs
+                    2,874 songs
                   </span>
                 </div>
               </Button>
@@ -137,7 +137,7 @@ export function Sidebar({
                       {category.name}
                     </span>
                     <span className="text-xs text-zinc-400">
-                      Playlist • Jacen Salvador
+                      Jacen Salvador
                     </span>
                   </div>
                 </Button>
