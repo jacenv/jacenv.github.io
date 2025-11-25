@@ -13,6 +13,9 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+import { Slider } from "@/components/ui/slider";
+import * as React from "react";
+
 interface BottomPlayerProps {
   project: Project | null;
   isPlaying: boolean;
@@ -24,6 +27,9 @@ export function BottomPlayer({
   isPlaying,
   onPlayPause,
 }: BottomPlayerProps) {
+  const [progress, setProgress] = React.useState([0]);
+  const [volume, setVolume] = React.useState([75]);
+
   // If no project is selected, render the empty state
   if (!project) {
     return (
@@ -78,9 +84,12 @@ export function BottomPlayer({
             <span className="text-xs text-zinc-600 min-w-[32px] text-right font-variant-numeric tabular-nums">
               -:--
             </span>
-            <div className="h-1 w-full bg-zinc-800 rounded-full relative">
-              {/* Empty progress bar */}
-            </div>
+            <Slider
+              defaultValue={[0]}
+              max={100}
+              step={1}
+              className="w-full group cursor-default"
+            />
             <span className="text-xs text-zinc-600 min-w-[32px] font-variant-numeric tabular-nums">
               -:--
             </span>
@@ -107,7 +116,12 @@ export function BottomPlayer({
           </Button>
           <div className="flex items-center gap-2 w-24">
             <Volume2 className="h-4 w-4 text-zinc-400" />
-            <div className="h-1 w-full bg-zinc-800 rounded-full relative"></div>
+            <Slider
+              defaultValue={[0]}
+              max={100}
+              step={1}
+              className="w-full group cursor-default"
+            />
           </div>
         </div>
       </div>
@@ -181,10 +195,13 @@ export function BottomPlayer({
           <span className="text-xs text-zinc-400 min-w-[32px] text-right font-variant-numeric tabular-nums">
             0:00
           </span>
-          <div className="h-1 w-full bg-zinc-600 rounded-full group cursor-pointer relative">
-            <div className="h-full w-1/3 bg-white rounded-full group-hover:bg-[#1db954]"></div>
-            <div className="absolute top-1/2 left-1/3 h-3 w-3 bg-white rounded-full opacity-0 group-hover:opacity-100 -translate-y-1/2 -translate-x-1/2 shadow-md"></div>
-          </div>
+          <Slider
+            value={progress}
+            onValueChange={setProgress}
+            max={100}
+            step={1}
+            className="w-full group"
+          />
           <span className="text-xs text-zinc-400 min-w-[32px] font-variant-numeric tabular-nums">
             3:45
           </span>
@@ -209,9 +226,13 @@ export function BottomPlayer({
         </Button>
         <div className="flex items-center gap-2 w-24 group">
           <Volume2 className="h-4 w-4 text-zinc-400 hover:text-white cursor-pointer" />
-          <div className="h-1 w-full bg-zinc-600 rounded-full cursor-pointer relative">
-            <div className="h-full w-3/4 bg-white rounded-full group-hover:bg-[#1db954]"></div>
-          </div>
+          <Slider
+            value={volume}
+            onValueChange={setVolume}
+            max={100}
+            step={1}
+            className="w-full group"
+          />
         </div>
       </div>
     </div>
