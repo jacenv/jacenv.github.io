@@ -79,7 +79,7 @@ export const skillsData: Project[] = [
     id: "skill-2",
     title: "Frameworks & Tools",
     description:
-      "React Native (Expo), React.js, Node.js, Convex, Supabase, Firebase, Git",
+      "React Native, React.js, Node.js, Convex, Supabase, Firebase, Git, Expo",
     tags: ["Frameworks"],
     date: "Current",
   },
@@ -94,7 +94,7 @@ export const skillsData: Project[] = [
     id: "skill-4",
     title: "Infrastructure & Platforms",
     description: "Kubernetes, Docker, Azure, Proxmox VE, NGINX",
-    tags: ["Infra"],
+    tags: ["Infrastructure"],
     date: "Current",
   },
   {
