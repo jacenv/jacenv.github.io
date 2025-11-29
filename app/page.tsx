@@ -11,6 +11,8 @@ import { MainContent } from "@/components/main-content";
 import { HomeContent } from "@/components/home-content";
 import { LikedSongsContent } from "@/components/liked-songs-content";
 import { BottomPlayer } from "@/components/bottom-player";
+import { MobileNav } from "@/components/mobile-nav";
+import { LibraryContent } from "@/components/library-content";
 import { sidebarData, projectsData, Project } from "@/lib/data";
 
 export default function SpotifyPage() {
@@ -18,6 +20,9 @@ export default function SpotifyPage() {
 
   // Default to 'home' view
   const [selectedCategoryId, setSelectedCategoryId] = React.useState("home");
+  
+  // Mobile Tab State
+  const [mobileTab, setMobileTab] = React.useState<"home" | "library" | "profile">("home");
 
   const [currentProject, setCurrentProject] = React.useState<Project | null>(
     null
@@ -146,8 +151,26 @@ export default function SpotifyPage() {
     const aboutCategory = sidebarData.find((c) => c.id === "about");
     if (aboutCategory) {
       setSelectedCategoryId(aboutCategory.id);
+      setMobileTab("profile");
     }
   };
+
+  const handleMobileTabChange = (tab: "home" | "library" | "profile") => {
+    setMobileTab(tab);
+    if (tab === "home") setSelectedCategoryId("home");
+    if (tab === "profile") setSelectedCategoryId("about");
+    if (tab === "library") {
+        // If we're not already in a specific playlist, show the root library
+        // Actually, clicking the tab should probably always show the library root first?
+        // Or if we are deep in a playlist, stay there?
+        // Let's make it simple: Click tab -> Go to Library Root List.
+        setSelectedCategoryId("library-root");
+    }
+  };
+
+  // Helper to determine if we should show the Library Content view on mobile
+  // We show Library Content if mobileTab is 'library' AND selectedCategoryId is 'library-root'
+  // If selectedCategoryId is a playlist ID, we show MainContent/LikedSongsContent instead.
 
   if (!isMounted) {
     return <div className="h-screen w-full bg-black"></div>;
@@ -207,7 +230,7 @@ export default function SpotifyPage() {
         </ResizablePanelGroup>
       </div>
 
-      {/* Bottom Player - Always Rendered */}
+      {/* Bottom Player - Always Rendered (Handles its own Desktop/Mobile switching) */}
       <BottomPlayer
         project={currentProject}
         isPlaying={isPlaying}
@@ -220,29 +243,21 @@ export default function SpotifyPage() {
         repeatMode={repeatMode}
       />
 
-      {/* Mobile View Fallback */}
-      <div className="md:hidden absolute inset-0 flex flex-col bg-black z-40">
-        <div className="p-4 border-b border-zinc-800">
-          <select
-            className="w-full p-2 rounded-md border border-zinc-800 bg-zinc-900 text-white"
-            value={selectedCategoryId}
-            onChange={(e) => setSelectedCategoryId(e.target.value)}
-          >
-            <option value="home">Home</option>
-            <option value="liked">Liked Songs</option>
-            {sidebarData.map((c) => (
-              <option key={c.id} value={c.id}>
-                {c.name}
-              </option>
-            ))}
-          </select>
-        </div>
+      {/* Mobile View Overlay */}
+      <div className="md:hidden absolute inset-0 flex flex-col bg-black z-40 pb-[80px]">
         <div className="flex-1 overflow-hidden">
           {selectedCategoryId === "home" ? (
             <HomeContent
               playlists={sidebarData}
               projects={projectsData}
-              onSelectCategory={setSelectedCategoryId}
+              onSelectCategory={(id) => {
+                  setSelectedCategoryId(id);
+                  // If selecting a playlist, we are technically "in" the library or home context
+                  // but let's just keep current tab or switch to library if it's a playlist?
+                  // Usually if clicked from Home, Home tab stays active but shows playlist.
+                  // If clicked from Library, Library tab stays active.
+                  // For simplicity, we just update content.
+              }}
               onNavigateToAbout={handleNavigateToAbout}
               onPlay={handlePlay}
               currentProject={currentProject}
@@ -255,6 +270,11 @@ export default function SpotifyPage() {
               onPlay={handlePlay}
               onNavigateToAbout={handleNavigateToAbout}
             />
+          ) : selectedCategoryId === "library-root" ? (
+             <LibraryContent 
+                categories={sidebarData}
+                onSelectCategory={(id) => setSelectedCategoryId(id)}
+             />
           ) : selectedCategory ? (
             <MainContent
               category={selectedCategory}
@@ -265,17 +285,8 @@ export default function SpotifyPage() {
             />
           ) : null}
         </div>
-        <BottomPlayer
-          project={currentProject}
-          isPlaying={isPlaying}
-          onPlayPause={handlePlayPause}
-          onNext={handleNext}
-          onPrevious={handlePrevious}
-          onShuffle={handleShuffle}
-          onRepeat={handleRepeat}
-          isShuffling={isShuffling}
-          repeatMode={repeatMode}
-        />
+        
+        <MobileNav currentTab={mobileTab} onTabChange={handleMobileTabChange} />
       </div>
     </div>
   );
