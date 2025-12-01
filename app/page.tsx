@@ -13,10 +13,12 @@ import { LikedSongsContent } from "@/components/liked-songs-content";
 import { BottomPlayer } from "@/components/bottom-player";
 import { MobileNav } from "@/components/mobile-nav";
 import { LibraryContent } from "@/components/library-content";
+import { SplashScreen } from "@/components/splash-screen";
 import { sidebarData, projectsData, Project } from "@/lib/data";
 
 export default function SpotifyPage() {
   const [isMounted, setIsMounted] = React.useState(false);
+  const [showSplash, setShowSplash] = React.useState(true);
 
   // Default to 'home' view
   const [selectedCategoryId, setSelectedCategoryId] = React.useState("home");
@@ -39,6 +41,10 @@ export default function SpotifyPage() {
   React.useEffect(() => {
     setIsMounted(true);
   }, []);
+
+  const handleSplashComplete = () => {
+    setShowSplash(false);
+  };
 
   // Determine which category is selected (if any), for MainContent
   const selectedCategory = sidebarData.find((c) => c.id === selectedCategoryId);
@@ -177,7 +183,9 @@ export default function SpotifyPage() {
   }
 
   return (
-    <div className="h-screen w-full overflow-hidden bg-black text-foreground flex flex-col">
+    <div className="h-screen w-full overflow-hidden bg-black text-foreground flex flex-col relative">
+      {showSplash && <SplashScreen onComplete={handleSplashComplete} />}
+      
       <div className="flex-1 overflow-hidden">
         <ResizablePanelGroup
           direction="horizontal"
