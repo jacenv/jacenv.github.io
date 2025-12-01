@@ -264,7 +264,7 @@ export function BottomPlayer({
           </div>
           <div className="flex items-center gap-2 w-full max-w-[600px]">
             <span className="text-xs text-zinc-400 min-w-[32px] text-right font-variant-numeric tabular-nums">
-              {project?.id === "status-1" ? "2026" : "0:00"}
+              {project?.id === "status-1" ? "2022" : "0:00"}
             </span>
             <Slider
               value={progress}
@@ -274,7 +274,7 @@ export function BottomPlayer({
               className="w-full group"
             />
             <span className="text-xs text-zinc-400 min-w-[32px] font-variant-numeric tabular-nums">
-              {project?.id === "status-1" ? "CS" : "3:45"}
+              {project?.id === "status-1" ? "2026" : "3:45"}
             </span>
           </div>
         </div>
