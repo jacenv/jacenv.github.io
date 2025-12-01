@@ -43,6 +43,15 @@ export function BottomPlayer({
   const [progress, setProgress] = React.useState([0]);
   const [volume, setVolume] = React.useState([75]);
 
+  React.useEffect(() => {
+    // If the project is the special "Open to Work" status, set progress to 90%
+    if (project?.id === "status-1") {
+      setProgress([90]);
+    } else {
+      setProgress([0]);
+    }
+  }, [project]);
+
   // If no project is selected, render the empty state (Desktop Only)
   if (!project) {
     return (
@@ -255,7 +264,7 @@ export function BottomPlayer({
           </div>
           <div className="flex items-center gap-2 w-full max-w-[600px]">
             <span className="text-xs text-zinc-400 min-w-[32px] text-right font-variant-numeric tabular-nums">
-              0:00
+              {project?.id === "status-1" ? "2026" : "0:00"}
             </span>
             <Slider
               value={progress}
@@ -265,7 +274,7 @@ export function BottomPlayer({
               className="w-full group"
             />
             <span className="text-xs text-zinc-400 min-w-[32px] font-variant-numeric tabular-nums">
-              3:45
+              {project?.id === "status-1" ? "CS" : "3:45"}
             </span>
           </div>
         </div>

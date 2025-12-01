@@ -14,7 +14,7 @@ import { BottomPlayer } from "@/components/bottom-player";
 import { MobileNav } from "@/components/mobile-nav";
 import { LibraryContent } from "@/components/library-content";
 import { SplashScreen } from "@/components/splash-screen";
-import { sidebarData, projectsData, Project } from "@/lib/data";
+import { sidebarData, projectsData, Project, statusProject } from "@/lib/data";
 
 export default function SpotifyPage() {
   const [isMounted, setIsMounted] = React.useState(false);
@@ -27,7 +27,7 @@ export default function SpotifyPage() {
   const [mobileTab, setMobileTab] = React.useState<"home" | "library" | "profile">("home");
 
   const [currentProject, setCurrentProject] = React.useState<Project | null>(
-    null
+    statusProject
   );
   const [isPlaying, setIsPlaying] = React.useState(false);
 

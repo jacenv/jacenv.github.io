@@ -21,6 +21,15 @@ export type Category = {
   content?: string;
 };
 
+export const statusProject: Project = {
+  id: "status-1",
+  title: "Welcome to my portfolio!",
+  description: "San Diego, California",
+  tags: ["Status"],
+  date: "Now",
+  link: "mailto:jacenvsalvador@gmail.com",
+};
+
 export const projectsData: Project[] = [
   {
     id: "proj-1",
@@ -161,6 +170,13 @@ export const interestsData: Project[] = [
     title: "Traveling",
     description: "Current favorite destination: Tokyo, Japan",
     tags: ["Flying"],
+    date: "Hobby",
+  },
+  {
+    id: "int-4",
+    title: "Gaming",
+    description: "Former collegiate Valorant player",
+    tags: ["Gaming"],
     date: "Hobby",
   },
 ];
