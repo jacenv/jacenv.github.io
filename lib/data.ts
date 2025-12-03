@@ -153,7 +153,7 @@ export const contactData: Project[] = [
 export const interestsData: Project[] = [
   {
     id: "int-1",
-    title: "Bouldering",
+    title: "Indoor Bouldering",
     description: "Certified V5 Mesa Rim Climber",
     tags: ["Outdoor"],
     date: "Activity",
@@ -174,10 +174,17 @@ export const interestsData: Project[] = [
   },
   {
     id: "int-4",
-    title: "Gaming",
+    title: "Competitive eSports",
     description: "Former collegiate Valorant player",
     tags: ["Gaming"],
     date: "Hobby",
+  },
+  {
+    id: "int-5",
+    title: "Frontend Development",
+    description: "Creating websites and web applications",
+    tags: ["Software"],
+    date: "Technical",
   },
 ];
 
