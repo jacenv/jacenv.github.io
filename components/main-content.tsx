@@ -71,22 +71,19 @@ export function MainContent({ category, currentProject, isPlaying, onPlay, onNav
 
                 {/* Actions Bar */}
                 <div className="flex items-center gap-8 px-6 py-6">
-                    {category.type === 'playlist' && (
-                        <Button 
-                            size="icon" 
-                            className="h-14 w-14 rounded-full shadow-lg bg-[#1ed760] hover:bg-[#1fdf64] hover:scale-105 transition-all text-black border-0"
-                            onClick={() => category.projects && category.projects.length > 0 && handlePlay(category.projects[0])}
-                        >
-                        {isPlaying && category.projects?.some(p => p.id === currentProject?.id) ? (
-                                <Pause className="h-6 w-6 fill-black stroke-black" />
-                        ) : (
-                                <Play className="h-6 w-6 fill-black stroke-black pl-1" />
-                        )}
-                        </Button>
+                {category.type === 'playlist' && (
+                    <Button 
+                        size="icon" 
+                        className="h-14 w-14 rounded-full shadow-lg bg-[#1ed760] hover:bg-[#1fdf64] hover:scale-105 transition-all text-black border-0"
+                        onClick={() => category.projects && category.projects.length > 0 && handlePlay(category.projects[0])}
+                    >
+                    {isPlaying && category.projects?.some(p => p.id === currentProject?.id) ? (
+                            <Pause className="h-6 w-6 fill-black stroke-black" />
+                    ) : (
+                            <Play className="h-6 w-6 fill-black stroke-black pl-1" />
                     )}
-                    <Button variant="ghost" size="icon" className="text-zinc-400 hover:text-white">
-                        <svg role="img" height="32" width="32" viewBox="0 0 24 24" className="fill-current"><path d="M5.21 1.57a6.757 6.757 0 0 1 6.778 0 3.387 3.387 0 0 0 3.744 0 6.757 6.757 0 0 1 6.778 0A6.757 6.757 0 0 1 24 8.327a6.757 6.757 0 0 1-1.49 4.744 3.387 3.387 0 0 0 0 4.744 6.757 6.757 0 0 1 0 9.488 6.757 6.757 0 0 1-4.744 1.49 3.387 3.387 0 0 0-4.744 0 6.757 6.757 0 0 1-9.488 0 6.757 6.757 0 0 1-1.49-4.744 3.387 3.387 0 0 0 0-4.744 6.757 6.757 0 0 1 0-9.488A6.757 6.757 0 0 1 5.21 1.57z"></path><path d="M11.999 16.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm0-4.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm0-4.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path></svg>
                     </Button>
+                )}
                 </div>
 
                 {/* Content Section */}
@@ -166,75 +163,71 @@ export function MainContent({ category, currentProject, isPlaying, onPlay, onNav
                     </div>
                     ) : (
                     <div className="pb-10 text-white">
-                        {(() => {
-                          try {
-                            const aboutData = JSON.parse(category.content || "{}");
-                            return (
-                              <div className="max-w-4xl space-y-12">
-                                {/* Bio Section */}
-                                <section>
-                                  <h2 className="text-2xl font-bold mb-4 text-white">Bio</h2>
-                                  <p className="text-lg text-zinc-300 leading-relaxed">
-                                    {aboutData.bio}
-                                  </p>
-                                </section>
+                        {/* Render About Me page */}
+                        {category.id === 'about' && category.content && (() => {
+                          const aboutData = JSON.parse(category.content);
+                          return (
+                            <div className="max-w-4xl space-y-12">
+                              {/* Bio Section */}
+                              <section>
+                                <h2 className="text-3xl font-bold mb-4">Bio</h2>
+                                <p className="text-lg leading-relaxed text-zinc-300">
+                                  {aboutData.bio}
+                                </p>
+                              </section>
 
-                                {/* Education Section */}
-                                <section>
-                                  <h2 className="text-2xl font-bold mb-6 text-white">Education</h2>
-                                  <div className="bg-[#181818] p-6 rounded-lg border border-zinc-800 hover:border-zinc-700 transition-colors">
-                                    <div className="flex justify-between items-start mb-2">
-                                      <h3 className="text-xl font-bold text-white">{aboutData.education.school}</h3>
-                                      <span className="text-sm text-zinc-400 bg-zinc-800 px-3 py-1 rounded-full">{aboutData.education.year}</span>
+                              {/* Education Section */}
+                              <section>
+                                <h2 className="text-3xl font-bold mb-4">Education</h2>
+                                <div className="bg-zinc-900/50 rounded-lg p-6 border border-zinc-800">
+                                  <div className="flex justify-between items-start">
+                                    <div>
+                                      <h3 className="text-xl font-bold mb-2">{aboutData.education.school}</h3>
+                                      <p className="text-zinc-300">{aboutData.education.degree}</p>
                                     </div>
-                                    <p className="text-zinc-300 font-medium">{aboutData.education.degree}</p>
+                                    <span className="text-zinc-400">{aboutData.education.year}</span>
                                   </div>
-                                </section>
+                                </div>
+                              </section>
 
-                                {/* Experience Section (if valid) */}
-                                {aboutData.experience && (
-                                  <section>
-                                    <h2 className="text-2xl font-bold mb-6 text-white">Experience</h2>
-                                    <div className="space-y-4">
-                                      {aboutData.experience.map((exp: any, idx: number) => (
-                                        <div key={idx} className="bg-[#181818] p-6 rounded-lg border border-zinc-800 hover:border-zinc-700 transition-colors">
-                                          <div className="flex justify-between items-start mb-2">
-                                            <div>
-                                              <h3 className="text-xl font-bold text-white">{exp.role}</h3>
-                                              <p className="text-green-500 font-medium">{exp.company}</p>
-                                            </div>
-                                            <span className="text-sm text-zinc-400">{exp.duration}</span>
-                                          </div>
-                                          <p className="text-zinc-300 mt-2">{exp.description}</p>
+                              {/* Experience Section */}
+                              <section>
+                                <h2 className="text-3xl font-bold mb-4">Experience</h2>
+                                <div className="space-y-4">
+                                  {aboutData.experience.map((exp: any, idx: number) => (
+                                    <div key={idx} className="bg-zinc-900/50 rounded-lg p-6 border border-zinc-800">
+                                      <div className="flex justify-between items-start mb-3">
+                                        <div>
+                                          <h3 className="text-xl font-bold">{exp.role}</h3>
+                                          <p className="text-[#1ed760] font-medium">{exp.company}</p>
                                         </div>
-                                      ))}
+                                        <span className="text-zinc-400">{exp.duration}</span>
+                                      </div>
+                                      <p className="text-zinc-300">{exp.description}</p>
                                     </div>
-                                  </section>
-                                )}
+                                  ))}
+                                </div>
+                              </section>
 
-                                {/* Contact / CTA Section */}
-                                <section className="pt-8 border-t border-zinc-800">
-                                  <h2 className="text-2xl font-bold mb-4 text-white">Let's Connect</h2>
-                                  <p className="text-zinc-300 mb-6">{aboutData.cta}</p>
-                                  <div className="flex gap-4">
-                                    <Button className="bg-green-500 hover:bg-green-600 text-black font-bold rounded-full px-8" onClick={() => window.location.href = 'mailto:jacenvsalvador@gmail.com'}>
+                              {/* Let's Connect Section */}
+                              <section>
+                                <h2 className="text-3xl font-bold mb-4">Let's Connect</h2>
+                                <p className="text-lg text-zinc-300 mb-6">{aboutData.cta}</p>
+                                <div className="flex gap-4">
+                                  <a href="mailto:jacenvsalvador@gmail.com">
+                                    <Button className="bg-[#1ed760] hover:bg-[#16be53] text-black font-semibold px-8">
                                       Email Me
                                     </Button>
-                                    <Button variant="outline" className="rounded-full px-8 border-zinc-700 text-white hover:bg-zinc-800 hover:text-white" onClick={() => window.open('https://linkedin.com/in/jacensalvador', '_blank')}>
+                                  </a>
+                                  <a href="https://linkedin.com/in/jacensalvador" target="_blank" rel="noreferrer">
+                                    <Button variant="outline" className="border-white text-white hover:bg-white/10 hover:text-white font-semibold px-8">
                                       LinkedIn
                                     </Button>
-                                  </div>
-                                </section>
-                              </div>
-                            );
-                          } catch (e) {
-                            // Fallback for plain text content if not JSON
-                            return (
-                              <div className="max-w-3xl space-y-8 text-lg leading-relaxed text-zinc-300 whitespace-pre-line">
-                                {category.content}
-                              </div>
-                            );
-                          }
+                                  </a>
+                                </div>
+                              </section>
+                            </div>
+                          );
                         })()}
                     </div>
                     )}
