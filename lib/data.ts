@@ -226,12 +226,22 @@ export const sidebarData: Category[] = [
     name: "About Me",
     icon: User,
     type: "about",
-    content: `About me:
-    Computer Science student at San Diego State University (June 2026). Has experience building full-stack and mobile applications using TypeScript, React Native, Next.js, and Convex. Passionate about creating scalable, high-performance systems, strong UI/UX, and modern cloud infrastructure.
-
-Education:
-San Diego State University - Computer Science, B.S. in Applied Arts and Sciences.
-
-Anything else you want to know (resume, projects, etc.)? Send an email!`,
+    content: JSON.stringify({
+      bio: "Computer Science student at San Diego State University (June 2026). Has experience building full-stack and mobile applications using TypeScript, React Native, Next.js, and Convex. Passionate about creating scalable, high-performance systems, strong UI/UX, and modern cloud infrastructure.",
+      education: {
+        school: "San Diego State University",
+        degree: "Computer Science, B.S. in Applied Arts and Sciences",
+        year: "Expected Graduation: June 2026"
+      },
+      experience: [
+        {
+          role: "Full Stack Developer",
+          company: "Freelance",
+          duration: "2023 - Present",
+          description: "Developing custom web and mobile solutions for clients using modern tech stacks."
+        }
+      ],
+      cta: "Anything else you want to know (resume, projects, etc.)? Send an email!"
+    }),
   },
 ];
