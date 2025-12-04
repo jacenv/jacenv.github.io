@@ -224,6 +224,9 @@ export function MainContent({ category, currentProject, isPlaying, onPlay, onNav
                                       LinkedIn
                                     </Button>
                                   </a>
+                                  <Button variant="outline" className="border-white text-white hover:bg-white/10 hover:text-white font-semibold px-8">
+                                    Resume
+                                  </Button>
                                 </div>
                               </section>
                             </div>
