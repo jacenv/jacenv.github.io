@@ -194,7 +194,7 @@ export const sidebarData: Category[] = [
     name: "My Projects",
     icon: Layers,
     type: "playlist",
-    description: "things i have created :0",
+    description: "projects that i have worked on",
     projects: projectsData,
   },
   {
@@ -202,7 +202,7 @@ export const sidebarData: Category[] = [
     name: "Skills / Tech Stack",
     icon: Code,
     type: "playlist",
-    description: "techincal skills",
+    description: "technical skills and tools that i have used",
     projects: skillsData,
   },
   {
@@ -210,7 +210,7 @@ export const sidebarData: Category[] = [
     name: "Contact",
     icon: Mail,
     type: "playlist",
-    description: "get in contact with me :)",
+    description: "get in contact with me!",
     projects: contactData,
   },
   {
@@ -218,7 +218,7 @@ export const sidebarData: Category[] = [
     name: "Outside Interests",
     icon: Globe,
     type: "playlist",
-    description: "what I like to do outside coding",
+    description: "what i like to do outside of coding",
     projects: interestsData,
   },
   {

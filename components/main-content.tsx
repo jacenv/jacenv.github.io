@@ -50,14 +50,17 @@ export function MainContent({ category, currentProject, isPlaying, onPlay, onNav
                      } shadow-lg`}></div>
                      <category.icon className="h-24 w-24 text-white relative z-10" />
                 </div>
-                <div className="flex flex-col gap-2 pb-2">
-                <span className="text-sm font-medium uppercase tracking-wider text-white">
-                    {category.type === "playlist" ? "Playlist" : "Profile"}
-                </span>
-                <h1 className="text-5xl font-black tracking-tight lg:text-8xl text-white">
-                    {category.name}
-                </h1>
-                <div className="flex items-center gap-2 text-sm text-zinc-300 font-medium mt-4">
+                <div className="flex flex-col mt-4">
+                    <span className="text-sm font-medium uppercase tracking-wider text-white">
+                        {category.type === "playlist" ? "Playlist" : "Profile"}
+                    </span>
+                    <h1 className="text-5xl font-black tracking-tight lg:text-8xl text-white mt-2">
+                        {category.name}
+                    </h1>
+                    {category.description && (
+                        <p className="text-zinc-400 font-medium text-sm mt-4">{category.description}</p>
+                    )}
+                    <div className="flex items-center gap-2 text-sm text-zinc-300 font-medium mt-4">
                     <div className="h-6 w-6 rounded-full bg-zinc-500"></div>
                     <span className="font-bold text-white hover:underline cursor-pointer">Jacen Salvador</span>
                     <span>•</span>
