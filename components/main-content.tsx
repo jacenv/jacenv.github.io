@@ -12,9 +12,10 @@ interface MainContentProps {
   isPlaying: boolean
   onPlay: (project: Project, queue?: Project[]) => void
   onNavigateToAbout: () => void
+  onNavigateHome: () => void
 }
 
-export function MainContent({ category, currentProject, isPlaying, onPlay, onNavigateToAbout }: MainContentProps) {
+export function MainContent({ category, currentProject, isPlaying, onPlay, onNavigateToAbout, onNavigateHome }: MainContentProps) {
   // Helper to determine headers based on category type or ID
   const getHeaders = () => {
      if (category.id === 'skills') return ['Category', 'Skills', 'Proficiency']
@@ -33,7 +34,7 @@ export function MainContent({ category, currentProject, isPlaying, onPlay, onNav
     <div className="h-full relative bg-[#121212] rounded-lg overflow-hidden ml-2 my-2 mr-2">
       {/* Top Navigation - Absolute to overlay content */}
       <div className="absolute top-0 left-0 right-0 z-20">
-        <TopNav onNavigateToAbout={onNavigateToAbout} />
+        <TopNav onNavigateToAbout={onNavigateToAbout} onNavigateHome={onNavigateHome} />
       </div>
       
       <ScrollArea className="h-full w-full bg-[#121212]">

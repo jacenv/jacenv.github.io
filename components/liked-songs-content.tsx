@@ -24,6 +24,7 @@ interface LikedSongsContentProps {
   isPlaying: boolean;
   onPlay: (project: Project, queue?: Project[]) => void;
   onNavigateToAbout: () => void;
+  onNavigateHome: () => void;
 }
 
 export function LikedSongsContent({
@@ -31,6 +32,7 @@ export function LikedSongsContent({
   isPlaying,
   onPlay,
   onNavigateToAbout,
+  onNavigateHome,
 }: LikedSongsContentProps) {
   // Manually add your songs here
   const songs: Song[] = [
@@ -124,7 +126,7 @@ export function LikedSongsContent({
     <div className="h-full relative bg-[#121212] rounded-lg overflow-hidden ml-2 my-2 mr-2">
       {/* Top Navigation */}
       <div className="absolute top-0 left-0 right-0 z-20">
-        <TopNav onNavigateToAbout={onNavigateToAbout} />
+        <TopNav onNavigateToAbout={onNavigateToAbout} onNavigateHome={onNavigateHome} />
       </div>
 
       <ScrollArea className="h-full w-full bg-[#121212]">

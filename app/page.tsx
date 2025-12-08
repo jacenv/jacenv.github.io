@@ -214,6 +214,7 @@ export default function SpotifyPage() {
                 projects={projectsData}
                 onSelectCategory={setSelectedCategoryId}
                 onNavigateToAbout={handleNavigateToAbout}
+                onNavigateHome={() => setSelectedCategoryId("home")}
                 onPlay={handlePlay}
                 currentProject={currentProject}
                 isPlaying={isPlaying}
@@ -224,6 +225,7 @@ export default function SpotifyPage() {
                 isPlaying={isPlaying}
                 onPlay={handlePlay}
                 onNavigateToAbout={handleNavigateToAbout}
+                onNavigateHome={() => setSelectedCategoryId("home")}
               />
             ) : selectedCategory ? (
               <MainContent
@@ -232,6 +234,7 @@ export default function SpotifyPage() {
                 isPlaying={isPlaying}
                 onPlay={handlePlay}
                 onNavigateToAbout={handleNavigateToAbout}
+                onNavigateHome={() => setSelectedCategoryId("home")}
               />
             ) : null}
           </ResizablePanel>

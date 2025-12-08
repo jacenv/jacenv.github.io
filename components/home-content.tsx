@@ -11,6 +11,7 @@ interface HomeContentProps {
   projects: Project[]
   onSelectCategory: (id: string) => void
   onNavigateToAbout: () => void
+  onNavigateHome: () => void
   onPlay: (project: Project, queue?: Project[]) => void
   currentProject: Project | null
   isPlaying: boolean
@@ -21,6 +22,7 @@ export function HomeContent({
     projects, 
     onSelectCategory, 
     onNavigateToAbout,
+    onNavigateHome,
     onPlay,
     currentProject,
     isPlaying
@@ -36,7 +38,7 @@ export function HomeContent({
     <div className="h-full relative bg-[#121212] rounded-lg overflow-hidden ml-2 my-2 mr-2 flex flex-col">
       {/* Top Navigation - Absolute to overlay content */}
       <div className="absolute top-0 left-0 right-0 z-20">
-        <TopNav onNavigateToAbout={onNavigateToAbout} />
+        <TopNav onNavigateToAbout={onNavigateToAbout} onNavigateHome={onNavigateHome} />
       </div>
       
       <ScrollArea className="h-full w-full bg-[#121212]">

@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { ChevronLeft, ChevronRight, User } from "lucide-react"
+import { ChevronLeft, ChevronRight, User, Home, Search } from "lucide-react"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,18 +12,39 @@ import {
 
 interface TopNavProps {
   onNavigateToAbout: () => void
+  onNavigateHome: () => void
 }
 
-export function TopNav({ onNavigateToAbout }: TopNavProps) {
+export function TopNav({ onNavigateToAbout, onNavigateHome }: TopNavProps) {
   return (
     <div className="sticky top-0 z-10 flex w-full items-center justify-between bg-transparent px-6 py-4 transition-colors hover:bg-black/20">
-      <div className="flex gap-4">
-        <Button size="icon" className="rounded-full bg-black/40 text-white hover:bg-black/60" disabled>
-          <ChevronLeft className="h-6 w-6" />
+      <div className="flex gap-4 items-center">
+        <div className="flex gap-2">
+            <Button size="icon" className="rounded-full bg-black/40 text-white hover:bg-black/60 h-8 w-8" disabled>
+            <ChevronLeft className="h-5 w-5" />
+            </Button>
+            <Button size="icon" className="rounded-full bg-black/40 text-white hover:bg-black/60 h-8 w-8" disabled>
+            <ChevronRight className="h-5 w-5" />
+            </Button>
+        </div>
+        
+        <Button 
+            size="icon" 
+            className="rounded-full bg-[#1f1f1f] text-white hover:scale-105 transition-transform h-12 w-12 flex-shrink-0"
+            onClick={onNavigateHome}
+        >
+            <Home className="h-6 w-6" />
         </Button>
-        <Button size="icon" className="rounded-full bg-black/40 text-white hover:bg-black/60" disabled>
-          <ChevronRight className="h-6 w-6" />
-        </Button>
+
+        <div className="relative group">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-zinc-400 group-focus-within:text-white pointer-events-none" />
+            <input 
+                type="text"
+                placeholder="What do you want to play?" 
+                className="pl-10 pr-4 h-12 rounded-full bg-[#1f1f1f] border-0 text-white placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-white/20 w-[300px] hover:bg-[#2a2a2a] transition-colors font-medium truncate" 
+            />
+       </div>
+
       </div>
       <div className="flex items-center gap-4">
         {/* Premium/Explore buttons could go here */}
