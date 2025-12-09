@@ -124,15 +124,10 @@ export function LikedSongsContent({
 
   return (
     <div className="h-full relative bg-[#121212] rounded-lg overflow-hidden ml-2 my-2 mr-2">
-      {/* Top Navigation */}
-      <div className="absolute top-0 left-0 right-0 z-20">
-        <TopNav onNavigateToAbout={onNavigateToAbout} onNavigateHome={onNavigateHome} />
-      </div>
-
       <ScrollArea className="h-full w-full bg-[#121212]">
         <div className="flex flex-col min-h-full pb-20">
           {/* Header Section */}
-          <div className="flex items-end gap-6 p-8 bg-gradient-to-b from-[#5038a0] to-[#121212] pt-[80px]">
+          <div className="flex items-end gap-6 p-8 bg-gradient-to-b from-[#5038a0] to-[#121212]">
             <div className="flex h-[232px] w-[232px] min-w-[232px] items-center justify-center shadow-2xl relative group bg-gradient-to-br from-[#450af5] to-[#c4efd9]">
               <div className="absolute inset-0 flex items-center justify-center">
                 <Library className="h-24 w-24 text-white" />

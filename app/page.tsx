@@ -15,6 +15,7 @@ import { MobileNav } from "@/components/mobile-nav";
 import { LibraryContent } from "@/components/library-content";
 import { SplashScreen } from "@/components/splash-screen";
 import { sidebarData, projectsData, Project, statusProject } from "@/lib/data";
+import { TopNav } from "@/components/top-nav";
 
 export default function SpotifyPage() {
   const [isMounted, setIsMounted] = React.useState(false);
@@ -207,7 +208,12 @@ export default function SpotifyPage() {
             withHandle
             className="hidden md:flex bg-black border-black"
           />
-          <ResizablePanel defaultSize={80} minSize={30} className="bg-black">
+          <ResizablePanel defaultSize={80} minSize={30} className="bg-black flex flex-col h-full">
+            <TopNav 
+                onNavigateToAbout={handleNavigateToAbout} 
+                onNavigateHome={() => setSelectedCategoryId("home")} 
+            />
+            <div className="flex-1 overflow-hidden">
             {selectedCategoryId === "home" ? (
               <HomeContent
                 playlists={sidebarData}
@@ -237,6 +243,7 @@ export default function SpotifyPage() {
                 onNavigateHome={() => setSelectedCategoryId("home")}
               />
             ) : null}
+            </div>
           </ResizablePanel>
         </ResizablePanelGroup>
       </div>

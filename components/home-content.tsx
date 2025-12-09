@@ -36,19 +36,16 @@ export function HomeContent({
 
   return (
     <div className="h-full relative bg-[#121212] rounded-lg overflow-hidden ml-2 my-2 mr-2 flex flex-col">
-      {/* Top Navigation - Absolute to overlay content */}
-      <div className="absolute top-0 left-0 right-0 z-20">
-        <TopNav onNavigateToAbout={onNavigateToAbout} onNavigateHome={onNavigateHome} />
-      </div>
-      
       <ScrollArea className="h-full w-full bg-[#121212]">
         <div className="flex flex-col min-h-full pb-20 bg-gradient-to-b from-[#222222] to-[#121212]">
             
             {/* Pills Section (Mocked) */}
-            <div className="mt-20 px-6 flex gap-2 mb-6 sticky top-0 z-10">
-                <Badge className="bg-white text-black hover:bg-zinc-200 cursor-pointer px-3 py-1.5 text-sm font-medium rounded-full border-0">All</Badge>
-                <Badge className="bg-[#2a2a2a] text-white hover:bg-[#3a3a3a] cursor-pointer px-3 py-1.5 text-sm font-medium rounded-full border-0">Music</Badge>
-                <Badge className="bg-[#2a2a2a] text-white hover:bg-[#3a3a3a] cursor-pointer px-3 py-1.5 text-sm font-medium rounded-full border-0">Podcasts</Badge>
+            <div className="sticky top-0 z-10 bg-[#121212]/95 backdrop-blur-sm px-6 py-4 mb-6 transition-colors duration-200">
+                <div className="flex gap-2">
+                    <Badge className="bg-white text-black hover:bg-zinc-200 cursor-pointer px-3 py-1.5 text-sm font-medium rounded-full border-0">All</Badge>
+                    <Badge className="bg-[#2a2a2a] text-white hover:bg-[#3a3a3a] cursor-pointer px-3 py-1.5 text-sm font-medium rounded-full border-0">Music</Badge>
+                    <Badge className="bg-[#2a2a2a] text-white hover:bg-[#3a3a3a] cursor-pointer px-3 py-1.5 text-sm font-medium rounded-full border-0">Podcasts</Badge>
+                </div>
             </div>
 
             {/* Recent Grid Section */}

@@ -32,15 +32,10 @@ export function MainContent({ category, currentProject, isPlaying, onPlay, onNav
 
   return (
     <div className="h-full relative bg-[#121212] rounded-lg overflow-hidden ml-2 my-2 mr-2">
-      {/* Top Navigation - Absolute to overlay content */}
-      <div className="absolute top-0 left-0 right-0 z-20">
-        <TopNav onNavigateToAbout={onNavigateToAbout} onNavigateHome={onNavigateHome} />
-      </div>
-      
       <ScrollArea className="h-full w-full bg-[#121212]">
         <div className="flex flex-col min-h-full pb-20">
             {/* Header Section */}
-            <div className="flex items-end gap-6 p-8 bg-gradient-to-b from-[#535353] to-[#121212] pt-[80px]">
+            <div className="flex items-end gap-6 p-8 bg-gradient-to-b from-[#535353] to-[#121212]">
                 <div className="flex h-[232px] w-[232px] min-w-[232px] items-center justify-center shadow-2xl relative group">
                      {/* Using a colored div as a placeholder for album art */}
                      <div className={`absolute inset-0 bg-gradient-to-br ${
