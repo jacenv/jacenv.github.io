@@ -270,6 +270,7 @@ export default function SpotifyPage() {
                   // For simplicity, we just update content.
               }}
               onNavigateToAbout={handleNavigateToAbout}
+              onNavigateHome={() => setSelectedCategoryId("home")}
               onPlay={handlePlay}
               currentProject={currentProject}
               isPlaying={isPlaying}
@@ -280,6 +281,7 @@ export default function SpotifyPage() {
               isPlaying={isPlaying}
               onPlay={handlePlay}
               onNavigateToAbout={handleNavigateToAbout}
+              onNavigateHome={() => setSelectedCategoryId("home")}
             />
           ) : selectedCategoryId === "library-root" ? (
              <LibraryContent 
@@ -293,6 +295,7 @@ export default function SpotifyPage() {
               isPlaying={isPlaying}
               onPlay={handlePlay}
               onNavigateToAbout={handleNavigateToAbout}
+              onNavigateHome={() => setSelectedCategoryId("home")}
             />
           ) : null}
         </div>
