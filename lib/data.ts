@@ -154,7 +154,7 @@ export const interestsData: Project[] = [
   {
     id: "int-1",
     title: "Indoor Bouldering",
-    description: "Certified V5 Mesa Rim Climber",
+    description: "Certified V6 Mesa Rim Climber",
     tags: ["Outdoor"],
     date: "Activity",
   },
