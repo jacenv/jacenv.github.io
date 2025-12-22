@@ -223,9 +223,11 @@ export function MainContent({ category, currentProject, isPlaying, onPlay, onNav
                                       LinkedIn
                                     </Button>
                                   </a>
-                                  <Button variant="outline" className="border-white text-white hover:bg-white/10 hover:text-white font-semibold px-8">
-                                    Resume
-                                  </Button>
+                                  <a href="https://drive.google.com/file/d/1JbWO4PQmiTf-LC0DDzR0pUldCw9YNRxV/view?usp=sharing" target="_blank" rel="noreferrer">
+                                    <Button variant="outline" className="border-white text-white hover:bg-white/10 hover:text-white font-semibold px-8">
+                                      Resume
+                                    </Button>
+                                  </a>
                                 </div>
                               </section>
                             </div>
