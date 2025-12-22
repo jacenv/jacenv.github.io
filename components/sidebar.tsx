@@ -64,7 +64,7 @@ export function Sidebar({
                     Liked Songs
                   </span>
                   <span className="text-xs text-zinc-400 flex items-center">
-                    <span className="text-green-500 -rotate-45 mr-1">📌</span>{" "}
+                    <span className="text-green-500 -rotate-45 mr-1">📍</span>{" "}
                     2,874 songs
                   </span>
                 </div>
