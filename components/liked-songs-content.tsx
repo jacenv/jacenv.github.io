@@ -48,11 +48,11 @@ export function LikedSongsContent({
     },
     {
       id: "2",
-      title: "FUCK THE SPEAKERZ UP",
-      artist: "ISOxo",
-      album: "FUCK THE SPEAKERZ UP",
+      title: "Ash",
+      artist: "LE SSERAFIM",
+      album: "HOT",
       dateAdded: "4 days ago",
-      duration: "2:46",
+      duration: "3:18",
       coverUrl:
         "https://i.scdn.co/image/ab67616d0000b273c8c32d4b031014685693552d",
     },
