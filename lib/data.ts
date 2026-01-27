@@ -32,6 +32,16 @@ export const statusProject: Project = {
 
 export const projectsData: Project[] = [
   {
+    id: "proj-5",
+    title: "Persistent Reminder Bot",
+    description: "Discord bot that pings you until tasks are completed.",
+    longDescription:
+      "A persistent Discord reminder bot that pings you at regular intervals for tasks. It won't stop notifying you until you mark the task as complete using the '!done' command. Built with Python and discord.py.",
+    tags: ["Python", "discord.py", "Bot"],
+    link: "https://github.com/jacenv/PersistentReminder",
+    date: "Jan 2026",
+  },
+  {
     id: "proj-1",
     title: "GoodMacros - Nutrition Finder App",
     description:
@@ -54,6 +64,16 @@ export const projectsData: Project[] = [
     date: "Aug 2025",
   },
   {
+    id: "proj-4",
+    title: "Systems & Cloud Lab",
+    description: "Infrastructure Deployment Projects on multi-OS environments.",
+    longDescription:
+      "Deployed multi-OS environments using OpenBSD, FreeBSD, Rocky Linux, and others. Built and maintained cloud and containerized systems with Docker, NGINX, Kubernetes, and Azure. Implemented secure, version-controlled infrastructures.",
+    tags: ["Kubernetes", "Docker", "Azure", "Unix"],
+    link: "#",
+    date: "May 2025",
+  },
+  {
     id: "proj-3",
     title: "Trauvo - Travel Planner",
     description:
@@ -63,16 +83,6 @@ export const projectsData: Project[] = [
     tags: ["React Native", "Next.js", "Convex", "Stripe"],
     link: "#",
     date: "In Progress",
-  },
-  {
-    id: "proj-4",
-    title: "Systems & Cloud Lab",
-    description: "Infrastructure Deployment Projects on multi-OS environments.",
-    longDescription:
-      "Deployed multi-OS environments using OpenBSD, FreeBSD, Rocky Linux, and others. Built and maintained cloud and containerized systems with Docker, NGINX, Kubernetes, and Azure. Implemented secure, version-controlled infrastructures.",
-    tags: ["Kubernetes", "Docker", "Azure", "Unix"],
-    link: "#",
-    date: "May 2025",
   },
 ];
 
