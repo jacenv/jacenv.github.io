@@ -24,7 +24,7 @@ export type Category = {
 export const statusProject: Project = {
   id: "status-1",
   title: "Full Stack Developer",
-  description: "San Diego • Seeking Summer 2026 Roles",
+  description: "San Diego • mthdstudios dev",
   tags: ["Status"],
   date: "Now",
   link: "mailto:jacenvsalvador@gmail.com",
