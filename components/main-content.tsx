@@ -189,7 +189,9 @@ export function MainContent({ category, currentProject, isPlaying, onPlay, onNav
                                       <h3 className="text-xl font-bold mb-2">{aboutData.education.school}</h3>
                                       <p className="text-zinc-300">{aboutData.education.degree}</p>
                                     </div>
-                                    <span className="text-zinc-400">{aboutData.education.year}</span>
+                                    {aboutData.education.year && (
+                                      <span className="text-zinc-400">{aboutData.education.year}</span>
+                                    )}
                                   </div>
                                 </div>
                               </section>

@@ -315,15 +315,20 @@ export const sidebarData: Category[] = [
       bio: "hi im jacen! i am a current senior at san diego state university studying computer science! i am currently a hobbiest builder who enjoys building fullstack mobile apps as well as frontend web work. come explore my portfolio to learn more about me!",
       education: {
         school: "San Diego State University",
-        degree: "Computer Science, B.S. in Applied Arts and Sciences",
-        year: "Expected Graduation: June 2026"
+        degree: "Computer Science, B.S. in Applied Arts and Sciences"
       },
       experience: [
+        {
+          role: "Cofounder",
+          company: "mthdstudios",
+          duration: "April 2026 - Present",
+          description: "Building mobile apps and websites as a service to clients."
+        },
         {
           role: "Full Stack Developer",
           company: "Freelance",
           duration: "2023 - Present",
-          description: "Developing custom web and mobile solutions for clients using modern tech stacks."
+          description: "Developing mobile apps along with websites for multiple clients."
         }
       ],
       cta: "Anything else you want to know (resume, projects, etc.)? Send an email!"
