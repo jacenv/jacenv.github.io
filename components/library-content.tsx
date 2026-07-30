@@ -1,5 +1,5 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Category } from "@/lib/data";
+import { Category, likedSongs } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { Library, Plus, ArrowRight, Search, ListFilter } from "lucide-react";
 
@@ -63,7 +63,7 @@ export function LibraryContent({ categories, onSelectCategory }: LibraryContentP
               <span className="font-medium truncate text-white text-base">Liked Songs</span>
               <div className="flex items-center text-zinc-400 text-sm">
                 <span className="text-green-500 -rotate-45 mr-1 text-xs">📌</span>
-                <span>Playlist • 2,874 songs</span>
+                <span>Playlist • {likedSongs.length} songs</span>
               </div>
             </div>
           </div>

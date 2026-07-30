@@ -198,6 +198,81 @@ export const interestsData: Project[] = [
   },
 ];
 
+export type Song = {
+  id: string;
+  title: string;
+  artist: string;
+  album: string;
+  dateAdded: string;
+  duration: string;
+  coverUrl?: string;
+  link?: string;
+};
+
+// Manually add your liked songs here — the count updates everywhere automatically.
+export const likedSongs: Song[] = [
+  {
+    id: "1",
+    title: "Entombed",
+    artist: "Deftones",
+    album: "Koi No Yokan",
+    dateAdded: "4 days ago",
+    duration: "4:59",
+    coverUrl:
+      "https://i.scdn.co/image/ab67616d0000b27387e62856413955a263649438",
+  },
+  {
+    id: "2",
+    title: "Ash",
+    artist: "LE SSERAFIM",
+    album: "HOT",
+    dateAdded: "4 days ago",
+    duration: "3:18",
+    coverUrl:
+      "https://i.scdn.co/image/ab67616d0000b273c8c32d4b031014685693552d",
+  },
+  {
+    id: "3",
+    title: "Shinunoga E-Wa",
+    artist: "Fujii Kaze",
+    album: "HELP EVER HURT NEVER",
+    dateAdded: "5 days ago",
+    duration: "3:06",
+    coverUrl:
+      "https://i.scdn.co/image/ab67616d0000b273e6d1304f1542579159495403",
+  },
+  {
+    id: "4",
+    title: "One Last Kiss",
+    artist: "Hikaru Utada",
+    album: "BADモード",
+    dateAdded: "1 week ago",
+    duration: "4:10",
+    coverUrl:
+      "https://i.scdn.co/image/ab67616d0000b273d45179b354461c2b65a52f21",
+  },
+  {
+    id: "5",
+    title: "Sunny",
+    artist: "Yorushika",
+    album: "Sunny",
+    dateAdded: "1 week ago",
+    duration: "4:31",
+    coverUrl:
+      "https://i.scdn.co/image/ab67616d0000b27383177927c561c3386e569191",
+  },
+  {
+    id: "6",
+    title: "Revolutionary Roads - On The Way",
+    artist: "AiNA THE END",
+    album: "Revolutionary Roads - On The Way",
+    dateAdded: "1 week ago",
+    duration: "3:18",
+    coverUrl:
+      "https://i.scdn.co/image/ab67616d0000b273e860607a724137e739bd2989",
+  },
+];
+
 export const sidebarData: Category[] = [
   {
     id: "projects",

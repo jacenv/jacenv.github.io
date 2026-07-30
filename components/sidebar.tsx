@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Category } from "@/lib/data";
+import { Category, likedSongs } from "@/lib/data";
 import { Library, Plus, ArrowRight } from "lucide-react";
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -65,7 +65,7 @@ export function Sidebar({
                   </span>
                   <span className="text-xs text-zinc-400 flex items-center">
                     <span className="text-green-500 -rotate-45 mr-1">📍</span>{" "}
-                    2,874 songs
+                    {likedSongs.length} songs
                   </span>
                 </div>
               </Button>

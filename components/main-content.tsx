@@ -35,8 +35,8 @@ export function MainContent({ category, currentProject, isPlaying, onPlay, onNav
       <ScrollArea className="h-full w-full bg-[#121212]">
         <div className="flex flex-col min-h-full pb-20">
             {/* Header Section */}
-            <div className="flex items-end gap-6 p-8 bg-gradient-to-b from-[#535353] to-[#121212]">
-                <div className="flex h-[232px] w-[232px] min-w-[232px] items-center justify-center shadow-2xl relative group">
+            <div className="flex flex-col items-center text-center gap-4 p-6 pt-16 md:flex-row md:items-end md:text-left md:gap-6 md:p-8 md:pt-8 bg-gradient-to-b from-[#535353] to-[#121212]">
+                <div className="flex h-44 w-44 md:h-[232px] md:w-[232px] md:min-w-[232px] items-center justify-center shadow-2xl relative group">
                      {/* Using a colored div as a placeholder for album art */}
                      <div className={`absolute inset-0 bg-gradient-to-br ${
                          category.id === 'skills' ? 'from-purple-600 to-blue-600' :
@@ -44,13 +44,13 @@ export function MainContent({ category, currentProject, isPlaying, onPlay, onNav
                          category.id === 'interests' ? 'from-orange-600 to-red-600' :
                          'from-blue-600 to-purple-700'
                      } shadow-lg`}></div>
-                     <category.icon className="h-24 w-24 text-white relative z-10" />
+                     <category.icon className="h-20 w-20 md:h-24 md:w-24 text-white relative z-10" />
                 </div>
-                <div className="flex flex-col mt-4">
+                <div className="flex flex-col items-center md:items-start md:mt-4 min-w-0">
                     <span className="text-sm font-medium uppercase tracking-wider text-white">
                         {category.type === "playlist" ? "Playlist" : "Profile"}
                     </span>
-                    <h1 className="text-5xl font-black tracking-tight lg:text-8xl text-white mt-2">
+                    <h1 className="text-4xl font-black tracking-tight md:text-5xl lg:text-8xl text-white mt-2 break-words">
                         {category.name}
                     </h1>
                     {category.description && (
@@ -69,7 +69,7 @@ export function MainContent({ category, currentProject, isPlaying, onPlay, onNav
             <div className="bg-gradient-to-b from-[#121212]/20 to-[#121212] relative z-10">
 
                 {/* Actions Bar */}
-                <div className="flex items-center gap-8 px-6 py-6">
+                <div className="flex items-center justify-end md:justify-start gap-8 px-4 md:px-6 py-4 md:py-6">
                 {category.type === 'playlist' && (
                     <Button 
                         size="icon" 
@@ -86,10 +86,10 @@ export function MainContent({ category, currentProject, isPlaying, onPlay, onNav
                 </div>
 
                 {/* Content Section */}
-                <div className="px-6">
+                <div className="px-4 md:px-6">
                     {category.type === "playlist" && category.projects ? (
                     <div className="pb-10">
-                        <div className="grid grid-cols-[16px_4fr_3fr_2fr_minmax(50px,1fr)] gap-4 border-b border-white/10 px-4 py-2 text-sm font-medium text-zinc-400 sticky top-[64px] bg-[#121212] z-10 mb-4">
+                        <div className="hidden md:grid grid-cols-[16px_4fr_3fr_2fr_minmax(50px,1fr)] gap-4 border-b border-white/10 px-4 py-2 text-sm font-medium text-zinc-400 sticky top-[64px] bg-[#121212] z-10 mb-4">
                         <div className="text-center">#</div>
                         <div>{headers[0]}</div>
                         <div>{headers[1]}</div>
@@ -100,16 +100,16 @@ export function MainContent({ category, currentProject, isPlaying, onPlay, onNav
                         {category.projects.map((project, i) => (
                             <div
                             key={project.id}
-                            className="group grid grid-cols-[16px_4fr_3fr_2fr_minmax(50px,1fr)] gap-4 rounded-md px-4 py-2 text-sm transition-colors hover:bg-white/10 items-center relative"
-                            onDoubleClick={() => handlePlay(project)}
+                            className="group flex md:grid grid-cols-[16px_4fr_3fr_2fr_minmax(50px,1fr)] gap-3 md:gap-4 rounded-md px-2 md:px-4 py-2 text-sm transition-colors hover:bg-white/10 active:bg-white/10 items-center relative cursor-pointer"
+                            onClick={() => handlePlay(project)}
                             >
-                            <div className="font-medium text-zinc-400 group-hover:text-white w-4 flex justify-center">
+                            <div className="font-medium text-zinc-400 group-hover:text-white w-4 hidden md:flex justify-center">
                                 <span className={cn("group-hover:hidden", currentProject?.id === project.id && isPlaying && "text-green-500")}>{i + 1}</span>
                                 <Button
-                                    size="icon" 
-                                    variant="ghost" 
+                                    size="icon"
+                                    variant="ghost"
                                     className="h-6 w-6 hidden group-hover:flex p-0 hover:bg-transparent text-white"
-                                    onClick={() => handlePlay(project)}
+                                    onClick={(e) => { e.stopPropagation(); handlePlay(project); }}
                                 >
                                     {currentProject?.id === project.id && isPlaying ? (
                                         <Pause className="h-4 w-4 fill-current" />
@@ -118,20 +118,24 @@ export function MainContent({ category, currentProject, isPlaying, onPlay, onNav
                                     )}
                                 </Button>
                             </div>
-                            <div className="flex items-center gap-4 min-w-0">
+                            <div className="flex items-center gap-3 md:gap-4 min-w-0 flex-1 md:flex-none">
                                 {/* Small thumbnail */}
-                                <div className="h-10 w-10 bg-zinc-800 rounded flex-shrink-0 flex items-center justify-center">
-                                    <category.icon className="h-5 w-5 text-zinc-500" />
+                                <div className="h-12 w-12 md:h-10 md:w-10 bg-zinc-800 rounded flex-shrink-0 flex items-center justify-center">
+                                    <category.icon className="h-6 w-6 md:h-5 md:w-5 text-zinc-500" />
                                 </div>
                                 <div className="flex flex-col gap-0.5 min-w-0">
                                     <span className={cn("truncate font-medium text-base", currentProject?.id === project.id ? 'text-[#1ed760]' : 'text-white')}>{project.title}</span>
-                                    <span className="truncate text-sm text-zinc-400 group-hover:text-white transition-colors cursor-pointer hover:underline">
-                                    {/* For non-projects, show description as artist name basically */}
+                                    {/* Desktop subtitle: artist name for projects, description otherwise */}
+                                    <span className="hidden md:block truncate text-sm text-zinc-400 group-hover:text-white transition-colors cursor-pointer hover:underline">
                                     {category.id === 'projects' ? 'Jacen Salvador' : project.description}
+                                    </span>
+                                    {/* Mobile subtitle: fold the tags in for projects since there's no column room */}
+                                    <span className="md:hidden truncate text-sm text-zinc-400">
+                                    {category.id === 'projects' ? project.tags.slice(0, 3).join(' · ') : project.description}
                                     </span>
                                 </div>
                             </div>
-                            <div className="flex flex-wrap gap-1 items-center">
+                            <div className="hidden md:flex flex-wrap gap-1 items-center">
                                 {project.tags.slice(0, 3).map((tag) => (
                                 <Badge key={tag} variant="secondary" className="rounded-sm text-[10px] bg-zinc-800 text-zinc-300 hover:bg-zinc-700">
                                     {tag}
@@ -141,16 +145,17 @@ export function MainContent({ category, currentProject, isPlaying, onPlay, onNav
                                 <span className="text-[10px] text-zinc-400">+{project.tags.length - 3}</span>
                                 )}
                             </div>
-                            <div className="text-zinc-400 text-sm">
+                            <div className="hidden md:block text-zinc-400 text-sm">
                                 {project.date}
                             </div>
-                            <div className="flex justify-end pr-2">
-                                {project.link && (
+                            <div className="flex justify-end pr-2 ml-auto md:ml-0 flex-shrink-0">
+                                {project.link && project.link !== '#' && (
                                 <a
                                     href={project.link}
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="opacity-0 group-hover:opacity-100 transition-opacity"
+                                    className="opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity p-1"
+                                    onClick={(e) => e.stopPropagation()}
                                 >
                                     <ExternalLink className="h-4 w-4 text-zinc-400 hover:text-white" />
                                 </a>
