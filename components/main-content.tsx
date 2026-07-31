@@ -184,13 +184,13 @@ export function MainContent({ category, currentProject, isPlaying, onPlay, onNav
                               <section>
                                 <h2 className="text-3xl font-bold mb-4">Education</h2>
                                 <div className="bg-zinc-900/50 rounded-lg p-6 border border-zinc-800">
-                                  <div className="flex justify-between items-start">
+                                  <div className="flex flex-col gap-1 md:flex-row md:justify-between md:items-start">
                                     <div>
                                       <h3 className="text-xl font-bold mb-2">{aboutData.education.school}</h3>
                                       <p className="text-zinc-300">{aboutData.education.degree}</p>
                                     </div>
                                     {aboutData.education.year && (
-                                      <span className="text-zinc-400">{aboutData.education.year}</span>
+                                      <span className="text-zinc-400 md:whitespace-nowrap">{aboutData.education.year}</span>
                                     )}
                                   </div>
                                 </div>
@@ -202,12 +202,12 @@ export function MainContent({ category, currentProject, isPlaying, onPlay, onNav
                                 <div className="space-y-4">
                                   {aboutData.experience.map((exp: any, idx: number) => (
                                     <div key={idx} className="bg-zinc-900/50 rounded-lg p-6 border border-zinc-800">
-                                      <div className="flex justify-between items-start mb-3">
+                                      <div className="flex flex-col gap-1 md:flex-row md:justify-between md:items-start mb-3">
                                         <div>
                                           <h3 className="text-xl font-bold">{exp.role}</h3>
                                           <p className="text-[#1ed760] font-medium">{exp.company}</p>
                                         </div>
-                                        <span className="text-zinc-400">{exp.duration}</span>
+                                        <span className="text-zinc-400 md:whitespace-nowrap">{exp.duration}</span>
                                       </div>
                                       <p className="text-zinc-300">{exp.description}</p>
                                     </div>
@@ -219,7 +219,7 @@ export function MainContent({ category, currentProject, isPlaying, onPlay, onNav
                               <section>
                                 <h2 className="text-3xl font-bold mb-4">Let's Connect</h2>
                                 <p className="text-lg text-zinc-300 mb-6">{aboutData.cta}</p>
-                                <div className="flex gap-4">
+                                <div className="flex flex-wrap gap-3">
                                   <a href="mailto:jacenvsalvador@gmail.com">
                                     <Button className="bg-[#1ed760] hover:bg-[#16be53] text-black font-semibold px-8">
                                       Email Me
