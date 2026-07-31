@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { ChevronLeft, ChevronRight, User, Home, Search, Bell, Users } from "lucide-react"
+import { ChevronLeft, ChevronRight, User, Home, Search } from "lucide-react"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -50,12 +50,6 @@ export function TopNav({ onNavigateToAbout, onNavigateHome }: TopNavProps) {
 
       </div>
       <div className="flex items-center gap-4">
-        <Button size="icon" variant="ghost" className="text-zinc-400 hover:text-white hover:bg-transparent">
-             <Bell className="h-5 w-5" />
-        </Button>
-        <Button size="icon" variant="ghost" className="text-zinc-400 hover:text-white hover:bg-transparent">
-             <Users className="h-5 w-5" />
-        </Button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="relative h-10 w-10 rounded-full p-0 hover:scale-105 transition-transform">
@@ -78,9 +72,6 @@ export function TopNav({ onNavigateToAbout, onNavigateHome }: TopNavProps) {
             <DropdownMenuItem onClick={onNavigateToAbout} className="focus:bg-zinc-700 focus:text-white cursor-pointer">
               <User className="mr-2 h-4 w-4" />
               <span>Profile</span>
-            </DropdownMenuItem>
-            <DropdownMenuItem className="focus:bg-zinc-700 focus:text-white cursor-pointer">
-               Settings
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

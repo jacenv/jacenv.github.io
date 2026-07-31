@@ -312,7 +312,7 @@ export const sidebarData: Category[] = [
     icon: User,
     type: "about",
     content: JSON.stringify({
-      bio: "hi im jacen! i am a current senior at san diego state university studying computer science! i am currently a hobbiest builder who enjoys building fullstack mobile apps as well as frontend web work. come explore my portfolio to learn more about me!",
+      bio: "hi im jacen! i am a recent college graduate at san diego state university with a bachelors in computer science! i am currently building mthdstudios, building fullstack mobile apps as well as frontend web work. come explore my portfolio to learn more about me!",
       education: {
         school: "San Diego State University",
         degree: "Computer Science, B.S. in Applied Arts and Sciences",
