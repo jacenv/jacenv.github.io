@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Play, ExternalLink, Pause, Clock, Library } from "lucide-react";
 import { TopNav } from "@/components/top-nav";
 import { cn } from "@/lib/utils";
-import { Project, likedSongs } from "@/lib/data";
+import { Project, Song, likedSongs } from "@/lib/data";
 
 // Album cover with a graceful fallback: if the image fails to load,
 // show the library icon instead of a broken image / spilling alt text.
