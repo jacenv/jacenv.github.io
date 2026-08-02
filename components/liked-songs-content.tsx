@@ -4,7 +4,7 @@ import * as React from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import { Play, ExternalLink, Pause, Clock, Library } from "lucide-react";
-import { TopNav } from "@/components/top-nav";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Project, Song, likedSongs } from "@/lib/data";
 
@@ -22,9 +22,12 @@ function SongCover({ src, alt }: { src?: string; alt: string }) {
   }
 
   return (
-    <img
+    <Image
       src={src}
       alt={alt}
+      width={48}
+      height={48}
+      unoptimized
       className="h-full w-full object-cover"
       onError={() => setError(true)}
     />
@@ -35,16 +38,12 @@ interface LikedSongsContentProps {
   currentProject: Project | null;
   isPlaying: boolean;
   onPlay: (project: Project, queue?: Project[]) => void;
-  onNavigateToAbout: () => void;
-  onNavigateHome: () => void;
 }
 
 export function LikedSongsContent({
   currentProject,
   isPlaying,
   onPlay,
-  onNavigateToAbout,
-  onNavigateHome,
 }: LikedSongsContentProps) {
   const songs = likedSongs;
 
@@ -85,10 +84,10 @@ export function LikedSongsContent({
             </div>
             <div className="flex flex-col items-center md:items-start gap-2 pb-2 min-w-0">
               <span className="text-sm font-medium uppercase tracking-wider text-white">
-                Playlist
+                Personal picks
               </span>
               <h1 className="text-4xl font-black tracking-tight md:text-5xl lg:text-8xl text-white break-words">
-                Liked Songs
+                Music I like
               </h1>
               <div className="flex items-center gap-2 text-sm text-zinc-300 font-medium mt-4">
                 <div className="h-6 w-6 rounded-full bg-zinc-500 flex items-center justify-center text-[10px] text-white">
@@ -98,7 +97,7 @@ export function LikedSongsContent({
                   Jacen Salvador
                 </span>
                 <span>•</span>
-                <span className="text-white/70">{songs.length} songs</span>
+                <span className="text-white/70">{songs.length} tracks</span>
               </div>
             </div>
           </div>

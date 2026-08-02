@@ -1,4 +1,4 @@
-import { Library, User, Code, Layers, Mail, Globe, Music } from "lucide-react";
+import { User, Code, Layers, Mail, Globe, type LucideIcon } from "lucide-react";
 
 export type Project = {
   id: string;
@@ -14,7 +14,7 @@ export type Project = {
 export type Category = {
   id: string;
   name: string;
-  icon: any;
+  icon: LucideIcon;
   type: "playlist" | "about";
   description?: string;
   projects?: Project[]; // Re-using Project type for "Tracks"
@@ -23,9 +23,9 @@ export type Category = {
 
 export const statusProject: Project = {
   id: "status-1",
-  title: "Full Stack Developer",
-  description: "San Diego • mthdstudios dev",
-  tags: ["Status"],
+  title: "Currently building",
+  description: "mthdstudios • mobile and web applications",
+  tags: ["Now building"],
   date: "Now",
   link: "mailto:jacenvsalvador@gmail.com",
 };

@@ -6,6 +6,12 @@ const nextConfig: NextConfig = {
   // basePath: '/<YOUR_REPOSITORY_NAME>',
   images: {
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "i.scdn.co",
+      },
+    ],
   },
 };
 

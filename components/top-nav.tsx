@@ -40,7 +40,7 @@ export function TopNav({ onNavigateToAbout, onNavigateHome }: TopNavProps) {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-zinc-400 group-focus-within:text-white pointer-events-none" />
             <input 
                 type="text"
-                placeholder="What do you want to play?" 
+                placeholder="Search my portfolio"
                 className="pl-10 pr-12 h-12 rounded-full bg-[#1f1f1f] border-0 text-white placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-white/20 w-full hover:bg-[#2a2a2a] transition-colors font-medium truncate" 
             />
             <div className="absolute right-3 top-1/2 -translate-y-1/2 border-l border-zinc-600 pl-3 h-6 flex items-center">
@@ -101,4 +101,3 @@ function Library(props: React.SVGProps<SVGSVGElement>) {
         </svg>
     )
 }
-

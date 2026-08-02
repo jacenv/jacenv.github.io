@@ -1,7 +1,5 @@
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { TopNav } from "@/components/top-nav"
 import { cn } from "@/lib/utils"
 import { Category, Project } from "@/lib/data"
 import { Play, Pause } from "lucide-react"
@@ -29,22 +27,32 @@ export function HomeContent({
 }: HomeContentProps) {
   
   const sidebarPlaylists = playlists.filter(c => c.type === 'playlist')
-  const currentHour = new Date().getHours()
-  let greeting = "Good evening"
-  if (currentHour < 12) greeting = "Good morning"
-  else if (currentHour < 18) greeting = "Good afternoon"
-
   return (
     <div className="h-full relative bg-[#121212] rounded-lg overflow-hidden ml-2 my-2 mr-2 flex flex-col">
       <ScrollArea className="h-full w-full bg-[#121212]">
         <div className="flex flex-col min-h-full pb-20 bg-gradient-to-b from-[#222222] to-[#121212]">
             
-            {/* Pills Section (Mocked) */}
+            {/* Portfolio filters */}
             <div className="sticky top-0 z-10 bg-[#121212]/95 backdrop-blur-sm px-6 py-4 mb-6 transition-colors duration-200">
                 <div className="flex gap-2">
-                    <Badge className="bg-white text-black hover:bg-zinc-200 cursor-pointer px-3 py-1.5 text-sm font-medium rounded-full border-0">All</Badge>
-                    <Badge className="bg-[#2a2a2a] text-white hover:bg-[#3a3a3a] cursor-pointer px-3 py-1.5 text-sm font-medium rounded-full border-0">Music</Badge>
-                    <Badge className="bg-[#2a2a2a] text-white hover:bg-[#3a3a3a] cursor-pointer px-3 py-1.5 text-sm font-medium rounded-full border-0">Podcasts</Badge>
+                    <Badge
+                      className="bg-white text-black hover:bg-zinc-200 cursor-pointer px-3 py-1.5 text-sm font-medium rounded-full border-0"
+                      onClick={onNavigateHome}
+                    >
+                      Overview
+                    </Badge>
+                    <Badge
+                      className="bg-[#2a2a2a] text-white hover:bg-[#3a3a3a] cursor-pointer px-3 py-1.5 text-sm font-medium rounded-full border-0"
+                      onClick={() => onSelectCategory("projects")}
+                    >
+                      Projects
+                    </Badge>
+                    <Badge
+                      className="bg-[#2a2a2a] text-white hover:bg-[#3a3a3a] cursor-pointer px-3 py-1.5 text-sm font-medium rounded-full border-0"
+                      onClick={onNavigateToAbout}
+                    >
+                      About
+                    </Badge>
                 </div>
             </div>
 
@@ -76,11 +84,17 @@ export function HomeContent({
                 </div>
             </div>
 
-            {/* "Made for Viewers" Section */}
+            {/* Featured projects */}
             <div className="px-6 mb-8">
                 <div className="flex items-end justify-between mb-4">
-                    <h2 className="text-2xl font-bold text-white hover:underline cursor-pointer">Made for Viewers</h2>
-                    <span className="text-xs text-zinc-400 font-bold hover:underline cursor-pointer uppercase tracking-widest">Show all</span>
+                    <h2 className="text-2xl font-bold text-white">Featured projects</h2>
+                    <button
+                      type="button"
+                      onClick={() => onSelectCategory("projects")}
+                      className="text-xs text-zinc-400 font-bold hover:underline cursor-pointer uppercase tracking-widest"
+                    >
+                      View all projects
+                    </button>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                     {projects.map((project) => (
@@ -117,14 +131,20 @@ export function HomeContent({
                 </div>
             </div>
 
-            {/* "Your Top Mixes" Section (Mocked with Skills/Interests) */}
+            {/* More portfolio sections */}
             <div className="px-6 mb-8">
                 <div className="flex items-end justify-between mb-4">
-                    <h2 className="text-2xl font-bold text-white hover:underline cursor-pointer">Your Top Mixes</h2>
-                    <span className="text-xs text-zinc-400 font-bold hover:underline cursor-pointer uppercase tracking-widest">Show all</span>
+                    <h2 className="text-2xl font-bold text-white">Explore more</h2>
+                    <button
+                      type="button"
+                      onClick={onNavigateToAbout}
+                      className="text-xs text-zinc-400 font-bold hover:underline cursor-pointer uppercase tracking-widest"
+                    >
+                      View my profile
+                    </button>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-                     {/* Reuse playlists as mixes */}
+                     {/* Reuse sections as portfolio cards */}
                      {sidebarPlaylists.map((playlist) => (
                          <div 
                              key={playlist.id + "-mix"} 

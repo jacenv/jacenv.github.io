@@ -192,7 +192,7 @@ export function BottomPlayer({
           <div className="h-14 w-14 bg-zinc-800 rounded-sm flex items-center justify-center overflow-hidden relative group cursor-pointer shadow-sm">
             {/* Placeholder for project image if available, else icon */}
             <div className="absolute inset-0 flex items-center justify-center bg-zinc-800 text-zinc-400">
-              <span className="text-[10px] font-bold text-white">PROJECT</span>
+              <span className="text-[10px] font-bold text-white">WORK</span>
             </div>
           </div>
           <div className="flex flex-col justify-center overflow-hidden">
@@ -264,7 +264,7 @@ export function BottomPlayer({
           </div>
           <div className="flex items-center gap-2 w-full max-w-[600px]">
             <span className="text-xs text-zinc-400 min-w-[32px] text-right font-variant-numeric tabular-nums">
-              {project?.id === "status-1" ? "2022" : "0:00"}
+              {project?.id === "status-1" ? "Now" : "0:00"}
             </span>
             <Slider
               value={progress}
@@ -274,7 +274,7 @@ export function BottomPlayer({
               className="w-full group"
             />
             <span className="text-xs text-zinc-400 min-w-[32px] font-variant-numeric tabular-nums">
-              {project?.id === "status-1" ? "2026" : "3:45"}
+              {project?.id === "status-1" ? "Current" : "3:45"}
             </span>
           </div>
         </div>

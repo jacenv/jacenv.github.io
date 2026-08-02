@@ -3,19 +3,35 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Play, ExternalLink, Pause, Clock } from "lucide-react"
 import { Category, Project } from "@/lib/data"
-import { TopNav } from "@/components/top-nav"
 import { cn } from "@/lib/utils"
+
+type AboutExperience = {
+  role: string
+  company: string
+  duration: string
+  description: string
+}
+
+type AboutData = {
+  bio: string
+  education: {
+    school: string
+    degree: string
+    year?: string
+  }
+  experience: AboutExperience[]
+  cta: string
+}
 
 interface MainContentProps {
   category: Category
   currentProject: Project | null
   isPlaying: boolean
   onPlay: (project: Project, queue?: Project[]) => void
-  onNavigateToAbout: () => void
-  onNavigateHome: () => void
+  onNavigateToProjects: () => void
 }
 
-export function MainContent({ category, currentProject, isPlaying, onPlay, onNavigateToAbout, onNavigateHome }: MainContentProps) {
+export function MainContent({ category, currentProject, isPlaying, onPlay, onNavigateToProjects }: MainContentProps) {
   // Helper to determine headers based on category type or ID
   const getHeaders = () => {
      if (category.id === 'skills') return ['Category', 'Skills', 'Proficiency']
@@ -25,6 +41,7 @@ export function MainContent({ category, currentProject, isPlaying, onPlay, onNav
   }
   
   const headers = getHeaders()
+  const isAbout = category.id === "about"
 
   const handlePlay = (project: Project) => {
       onPlay(project, category.projects);
@@ -48,20 +65,61 @@ export function MainContent({ category, currentProject, isPlaying, onPlay, onNav
                 </div>
                 <div className="flex flex-col items-center md:items-start md:mt-4 min-w-0">
                     <span className="text-sm font-medium uppercase tracking-wider text-white">
-                        {category.type === "playlist" ? "Playlist" : "Profile"}
+                        {isAbout ? "Profile" : "Portfolio section"}
                     </span>
-                    <h1 className="text-4xl font-black tracking-tight md:text-5xl lg:text-8xl text-white mt-2 break-words">
-                        {category.name}
+                    <h1 className={cn(
+                      "text-4xl font-black tracking-tight md:text-5xl text-white mt-2 break-words",
+                      isAbout ? "lg:text-7xl max-w-3xl" : "lg:text-8xl"
+                    )}>
+                        {isAbout ? "Hi, I’m Jacen" : category.name}
                     </h1>
-                    {category.description && (
+                    {isAbout ? (
+                        <p className="max-w-2xl text-base md:text-lg leading-relaxed text-zinc-200 mt-4">
+                          Full stack developer building mobile and web applications
+                        </p>
+                    ) : category.description && (
                         <p className="text-zinc-400 font-medium text-sm mt-4">{category.description}</p>
                     )}
                     <div className="flex items-center gap-2 text-sm text-zinc-300 font-medium mt-4">
                     <div className="h-6 w-6 rounded-full bg-zinc-500"></div>
                     <span className="font-bold text-white hover:underline cursor-pointer">Jacen Salvador</span>
                     <span>•</span>
-                    <span className="text-white/70">{category.type === "playlist" ? `${category.projects?.length || 0} items` : "1 person"}</span>
+                    <span className="text-white/70">
+                      {isAbout
+                        ? "San Diego, CA"
+                        : `${category.projects?.length || 0} ${category.id === "projects" ? "projects" : category.id === "skills" ? "skill groups" : category.id === "contact" ? "contact options" : "interests"}`}
+                    </span>
                 </div>
+                {isAbout && (
+                  <div className="mt-6 flex flex-wrap items-center justify-center gap-3 md:justify-start">
+                    <Button
+                      className="bg-[#1ed760] px-5 font-semibold text-black hover:bg-[#16be53]"
+                      onClick={onNavigateToProjects}
+                    >
+                      View selected work
+                    </Button>
+                    <Button
+                      asChild
+                      variant="outline"
+                      className="border-white/30 px-5 font-semibold text-white hover:bg-white/10 hover:text-white"
+                    >
+                      <a href="mailto:jacenvsalvador@gmail.com">Email me</a>
+                    </Button>
+                    <Button
+                      asChild
+                      variant="ghost"
+                      className="px-3 font-semibold text-zinc-300 hover:bg-white/10 hover:text-white"
+                    >
+                      <a
+                        href="https://drive.google.com/file/d/1JbWO4PQmiTf-LC0DDzR0pUldCw9YNRxV/view?usp=sharing"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        View resume
+                      </a>
+                    </Button>
+                  </div>
+                )}
                 </div>
             </div>
 
@@ -169,7 +227,7 @@ export function MainContent({ category, currentProject, isPlaying, onPlay, onNav
                     <div className="pb-10 text-white">
                         {/* Render About Me page */}
                         {category.id === 'about' && category.content && (() => {
-                          const aboutData = JSON.parse(category.content);
+                          const aboutData = JSON.parse(category.content) as AboutData;
                           return (
                             <div className="max-w-4xl space-y-12">
                               {/* Bio Section */}
@@ -200,7 +258,7 @@ export function MainContent({ category, currentProject, isPlaying, onPlay, onNav
                               <section>
                                 <h2 className="text-3xl font-bold mb-4">Experience</h2>
                                 <div className="space-y-4">
-                                  {aboutData.experience.map((exp: any, idx: number) => (
+                                  {aboutData.experience.map((exp, idx) => (
                                     <div key={idx} className="bg-zinc-900/50 rounded-lg p-6 border border-zinc-800">
                                       <div className="flex flex-col gap-1 md:flex-row md:justify-between md:items-start mb-3">
                                         <div>
@@ -217,7 +275,7 @@ export function MainContent({ category, currentProject, isPlaying, onPlay, onNav
 
                               {/* Let's Connect Section */}
                               <section>
-                                <h2 className="text-3xl font-bold mb-4">Let's Connect</h2>
+                                <h2 className="text-3xl font-bold mb-4">Let&apos;s Connect</h2>
                                 <p className="text-lg text-zinc-300 mb-6">{aboutData.cta}</p>
                                 <div className="flex flex-wrap gap-3">
                                   <a href="mailto:jacenvsalvador@gmail.com">

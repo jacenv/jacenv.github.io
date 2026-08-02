@@ -4,6 +4,13 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Category, likedSongs } from "@/lib/data";
 import { Library, Plus, ArrowRight } from "lucide-react";
 
+const categorySubtitles: Record<string, string> = {
+  projects: "Selected work",
+  skills: "Tools & technologies",
+  contact: "Get in touch",
+  interests: "Beyond code",
+};
+
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
   categories: Category[];
   selectedCategoryId: string;
@@ -29,7 +36,7 @@ export function Sidebar({
               className="justify-start text-left font-bold text-zinc-400 hover:text-white hover:bg-transparent pl-0 text-base group"
             >
               <Library className="mr-2 h-6 w-6 group-hover:text-white transition-colors" />
-              Your Library
+              Explore
             </Button>
             <div className="flex items-center gap-2">
               <Plus className="h-5 w-5 text-zinc-400 hover:text-white cursor-pointer transition-colors" />
@@ -39,10 +46,10 @@ export function Sidebar({
 
           <div className="px-4 py-2 flex gap-2 overflow-x-auto no-scrollbar">
             <span className="px-3 py-1 bg-[#2a2a2a] rounded-full text-sm text-white cursor-pointer hover:bg-[#3a3a3a] transition-colors whitespace-nowrap">
-              Playlists
+              Sections
             </span>
             <span className="px-3 py-1 bg-[#2a2a2a] rounded-full text-sm text-white cursor-pointer hover:bg-[#3a3a3a] transition-colors whitespace-nowrap">
-              Projects
+              Work
             </span>
           </div>
 
@@ -61,11 +68,11 @@ export function Sidebar({
                 </div>
                 <div className="flex flex-col items-start overflow-hidden">
                   <span className="text-white font-medium truncate w-full">
-                    Liked Songs
+                    Music I like
                   </span>
                   <span className="text-xs text-zinc-400 flex items-center">
                     <span className="text-green-500 -rotate-45 mr-1">📍</span>{" "}
-                    {likedSongs.length} songs
+                    {likedSongs.length} tracks
                   </span>
                 </div>
               </Button>
@@ -95,7 +102,7 @@ export function Sidebar({
                       {category.name}
                     </span>
                     <span className="text-xs text-zinc-400">
-                      Jacen Salvador
+                      {categorySubtitles[category.id] || "Portfolio section"}
                     </span>
                   </div>
                 </Button>

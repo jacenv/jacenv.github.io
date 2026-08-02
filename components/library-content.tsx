@@ -1,6 +1,5 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Category, likedSongs } from "@/lib/data";
-import { cn } from "@/lib/utils";
 import { Library, Plus, ArrowRight, Search, ListFilter } from "lucide-react";
 
 interface LibraryContentProps {
@@ -20,7 +19,7 @@ export function LibraryContent({ categories, onSelectCategory }: LibraryContentP
             <div className="h-8 w-8 rounded-full bg-orange-500 flex items-center justify-center text-black font-bold">
               J
             </div>
-            <h1 className="text-xl font-bold">Your Library</h1>
+            <h1 className="text-xl font-bold">Explore</h1>
           </div>
           <div className="flex items-center gap-4">
             <Search className="h-6 w-6" />
@@ -30,13 +29,13 @@ export function LibraryContent({ categories, onSelectCategory }: LibraryContentP
         
         <div className="flex gap-2 mb-2 overflow-x-auto no-scrollbar">
             <span className="px-4 py-1.5 bg-[#2a2a2a] rounded-full text-sm text-white cursor-pointer border border-transparent">
-              Playlists
+              Sections
             </span>
             <span className="px-4 py-1.5 bg-[#2a2a2a] rounded-full text-sm text-white cursor-pointer border border-transparent">
-              Projects
+              Work
             </span>
             <span className="px-4 py-1.5 bg-[#2a2a2a] rounded-full text-sm text-white cursor-pointer border border-transparent">
-              Albums
+              About
             </span>
         </div>
       </div>
@@ -44,7 +43,7 @@ export function LibraryContent({ categories, onSelectCategory }: LibraryContentP
       <div className="px-4 py-2 flex items-center justify-between text-zinc-400 text-sm mb-2">
           <div className="flex items-center gap-1">
               <ArrowRight className="h-4 w-4 rotate-90" />
-              <span>Recents</span>
+              <span>Portfolio sections</span>
           </div>
           <ListFilter className="h-4 w-4" />
       </div>
@@ -60,10 +59,10 @@ export function LibraryContent({ categories, onSelectCategory }: LibraryContentP
               <Library className="h-8 w-8 text-white" />
             </div>
             <div className="flex flex-col gap-1 overflow-hidden">
-              <span className="font-medium truncate text-white text-base">Liked Songs</span>
+              <span className="font-medium truncate text-white text-base">Music I like</span>
               <div className="flex items-center text-zinc-400 text-sm">
                 <span className="text-green-500 -rotate-45 mr-1 text-xs">📌</span>
-                <span>Playlist • {likedSongs.length} songs</span>
+                <span>Personal picks • {likedSongs.length} tracks</span>
               </div>
             </div>
           </div>
@@ -83,27 +82,14 @@ export function LibraryContent({ categories, onSelectCategory }: LibraryContentP
                   {category.name}
                 </span>
                 <span className="text-zinc-400 text-sm truncate">
-                  Playlist • Jacen Salvador
+                  {category.description || "Portfolio section"}
                 </span>
               </div>
             </div>
           ))}
           
-          {/* Add some fake items to make it look fuller if needed */}
-           <div className="flex items-center gap-3 p-2 hover:bg-[#2a2a2a] rounded-md cursor-pointer opacity-50">
-              <div className="h-16 w-16 bg-[#282828] flex items-center justify-center flex-shrink-0 rounded-full">
-                <Plus className="h-8 w-8 text-zinc-400" />
-              </div>
-              <div className="flex flex-col gap-1 overflow-hidden">
-                <span className="font-medium truncate text-white text-base">
-                  Add Artists
-                </span>
-              </div>
-            </div>
-
         </div>
       </ScrollArea>
     </div>
   );
 }
-

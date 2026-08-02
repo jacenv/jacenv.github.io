@@ -162,6 +162,11 @@ export default function SpotifyPage() {
     }
   };
 
+  const handleNavigateToProjects = () => {
+    setSelectedCategoryId("projects");
+    setMobileTab("library");
+  };
+
   const handleMobileTabChange = (tab: "home" | "library" | "profile") => {
     setMobileTab(tab);
     if (tab === "home") setSelectedCategoryId("home");
@@ -230,8 +235,6 @@ export default function SpotifyPage() {
                 currentProject={currentProject}
                 isPlaying={isPlaying}
                 onPlay={handlePlay}
-                onNavigateToAbout={handleNavigateToAbout}
-                onNavigateHome={() => setSelectedCategoryId("home")}
               />
             ) : selectedCategory ? (
               <MainContent
@@ -239,8 +242,7 @@ export default function SpotifyPage() {
                 currentProject={currentProject}
                 isPlaying={isPlaying}
                 onPlay={handlePlay}
-                onNavigateToAbout={handleNavigateToAbout}
-                onNavigateHome={() => setSelectedCategoryId("home")}
+                onNavigateToProjects={handleNavigateToProjects}
               />
             ) : null}
             </div>
@@ -287,8 +289,6 @@ export default function SpotifyPage() {
               currentProject={currentProject}
               isPlaying={isPlaying}
               onPlay={handlePlay}
-              onNavigateToAbout={handleNavigateToAbout}
-              onNavigateHome={() => setSelectedCategoryId("home")}
             />
           ) : selectedCategoryId === "library-root" ? (
              <LibraryContent 
@@ -301,8 +301,7 @@ export default function SpotifyPage() {
               currentProject={currentProject}
               isPlaying={isPlaying}
               onPlay={handlePlay}
-              onNavigateToAbout={handleNavigateToAbout}
-              onNavigateHome={() => setSelectedCategoryId("home")}
+              onNavigateToProjects={handleNavigateToProjects}
             />
           ) : null}
         </div>

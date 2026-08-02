@@ -26,7 +26,7 @@ export function MobileNav({ currentTab, onTabChange }: MobileNavProps) {
               currentTab === "home" ? "text-white" : "text-zinc-400"
             )}
           >
-            Home
+            Overview
           </span>
         </button>
         <button
@@ -45,7 +45,7 @@ export function MobileNav({ currentTab, onTabChange }: MobileNavProps) {
               currentTab === "library" ? "text-white" : "text-zinc-400"
             )}
           >
-            Your Library
+            Explore
           </span>
         </button>
         <button
@@ -64,11 +64,10 @@ export function MobileNav({ currentTab, onTabChange }: MobileNavProps) {
               currentTab === "profile" ? "text-white" : "text-zinc-400"
             )}
           >
-            Profile
+            About
           </span>
         </button>
       </div>
     </div>
   );
 }
-
