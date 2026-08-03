@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -15,6 +15,15 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "jacen - mthdstudios",
   description: "jacen's portfolio spotify style :)",
+};
+
+// viewportFit: "cover" is what makes env(safe-area-inset-*) resolve to real
+// values on iPhone — without it they are always 0 and the bottom bars sit
+// underneath the home indicator.
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({

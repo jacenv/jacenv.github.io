@@ -8,7 +8,7 @@ interface MobileNavProps {
 
 export function MobileNav({ currentTab, onTabChange }: MobileNavProps) {
   return (
-    <div className="fixed bottom-0 left-0 right-0 h-[80px] bg-black/95 backdrop-blur-md border-t border-zinc-800 z-50 pb-4 md:hidden">
+    <div className="fixed bottom-0 left-0 right-0 h-[calc(72px+env(safe-area-inset-bottom))] pb-[env(safe-area-inset-bottom)] bg-black/95 backdrop-blur-md border-t border-zinc-800 z-50 md:hidden">
       <div className="flex items-center justify-around h-full px-4">
         <button
           onClick={() => onTabChange("home")}

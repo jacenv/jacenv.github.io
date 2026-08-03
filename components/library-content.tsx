@@ -12,7 +12,7 @@ export function LibraryContent({ categories, onSelectCategory }: LibraryContentP
   const playlists = categories.filter((c) => c.type === "playlist");
 
   return (
-    <div className="h-full bg-[#121212] text-white flex flex-col pb-[160px] pt-8">
+    <div className="h-full bg-[#121212] text-white flex flex-col pb-24 pt-8">
       <div className="px-4 py-4 sticky top-0 bg-[#121212] z-10">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">

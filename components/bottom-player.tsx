@@ -185,7 +185,7 @@ export function BottomPlayer({
   return (
     <>
       {/* Mobile Mini Player */}
-      <div className="md:hidden fixed bottom-[84px] left-2 right-2 h-14 bg-[#282828] rounded-md z-50 flex items-center justify-between px-3 shadow-lg" onClick={onPlayPause}>
+      <div className="md:hidden fixed bottom-[calc(80px+env(safe-area-inset-bottom))] left-2 right-2 h-14 bg-[#282828] rounded-md z-50 flex items-center justify-between px-3 shadow-lg" onClick={onPlayPause}>
          <div className="flex items-center gap-3 flex-1 min-w-0">
             <div className="h-10 w-10 bg-zinc-700 rounded-sm flex-shrink-0 overflow-hidden">
               <PlayerArtwork project={project} />

@@ -185,11 +185,11 @@ export default function SpotifyPage() {
   // If selectedCategoryId is a playlist ID, we show MainContent/LikedSongsContent instead.
 
   if (!isMounted) {
-    return <div className="h-screen w-full bg-black"></div>;
+    return <div className="h-dvh w-full bg-black"></div>;
   }
 
   return (
-    <div className="h-screen w-full overflow-hidden bg-black text-foreground flex flex-col relative">
+    <div className="h-dvh w-full overflow-hidden bg-black text-foreground flex flex-col relative">
       {showSplash && <SplashScreen onComplete={handleSplashComplete} />}
       
       <div className="flex-1 overflow-hidden">
@@ -264,7 +264,7 @@ export default function SpotifyPage() {
       />
 
       {/* Mobile View Overlay */}
-      <div className="md:hidden absolute inset-0 flex flex-col bg-black z-40 pb-[80px]">
+      <div className="md:hidden absolute inset-0 flex flex-col bg-black z-40 pb-[calc(72px+env(safe-area-inset-bottom))]">
         <div className="flex-1 overflow-hidden">
           {selectedCategoryId === "home" ? (
             <HomeContent
