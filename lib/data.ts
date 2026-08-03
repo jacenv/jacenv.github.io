@@ -198,78 +198,76 @@ export const interestsData: Project[] = [
   },
 ];
 
-export type Song = {
+export type Artist = {
   id: string;
-  title: string;
-  artist: string;
-  album: string;
-  dateAdded: string;
-  duration: string;
-  coverUrl?: string;
+  name: string;
+  /** Optional image URL. Falls back to a gradient tile with the artist's initial. */
+  imageUrl?: string;
   link?: string;
 };
 
-// Manually add your liked songs here — the count updates everywhere automatically.
-export const likedSongs: Song[] = [
+// Manually add artists here — the count updates everywhere automatically.
+// Add an `imageUrl` to any entry to replace its gradient placeholder tile.
+export const likedArtists: Artist[] = [
   {
     id: "1",
-    title: "Entombed",
-    artist: "Deftones",
-    album: "Koi No Yokan",
-    dateAdded: "4 days ago",
-    duration: "4:59",
-    coverUrl:
-      "https://i.scdn.co/image/ab67616d0000b27387e62856413955a263649438",
+    name: "Olivia Rodrigo",
+    imageUrl: "https://i.scdn.co/image/ab6761610000f178b14eb4dcfd2f3858bed06e44",
+    link: "https://open.spotify.com/artist/1McMsnEElThX1knmY4oliG",
   },
   {
     id: "2",
-    title: "Ash",
-    artist: "LE SSERAFIM",
-    album: "HOT",
-    dateAdded: "4 days ago",
-    duration: "3:18",
-    coverUrl:
-      "https://i.scdn.co/image/ab67616d0000b273c8c32d4b031014685693552d",
+    name: "LOONA",
+    imageUrl: "https://i.scdn.co/image/ab6761610000f17880584436e5726afb70cee7f8",
+    link: "https://open.spotify.com/artist/52zMTJCKluDlFwMQWmccY7",
   },
   {
     id: "3",
-    title: "Shinunoga E-Wa",
-    artist: "Fujii Kaze",
-    album: "HELP EVER HURT NEVER",
-    dateAdded: "5 days ago",
-    duration: "3:06",
-    coverUrl:
-      "https://i.scdn.co/image/ab67616d0000b273e6d1304f1542579159495403",
+    name: "ARTMS",
+    imageUrl: "https://i.scdn.co/image/ab6761610000f178c0be4bb287e7a4fc5452d5fc",
+    link: "https://open.spotify.com/artist/213zHiFZwtDVEqyxeCbk07",
   },
   {
     id: "4",
-    title: "One Last Kiss",
-    artist: "Hikaru Utada",
-    album: "BADモード",
-    dateAdded: "1 week ago",
-    duration: "4:10",
-    coverUrl:
-      "https://i.scdn.co/image/ab67616d0000b273d45179b354461c2b65a52f21",
+    name: "aespa",
+    imageUrl: "https://i.scdn.co/image/ab6761610000f178053bbb910dda6d4ab0618b8b",
+    link: "https://open.spotify.com/artist/6YVMFz59CuY7ngCxTxjpxE",
   },
   {
     id: "5",
-    title: "Sunny",
-    artist: "Yorushika",
-    album: "Sunny",
-    dateAdded: "1 week ago",
-    duration: "4:31",
-    coverUrl:
-      "https://i.scdn.co/image/ab67616d0000b27383177927c561c3386e569191",
+    name: "ISOxo",
+    imageUrl: "https://i.scdn.co/image/ab6761610000f178479dba99dbe84334400964e9",
+    link: "https://open.spotify.com/artist/4zVCMnjw54nkhGHU4e1Pav",
   },
   {
     id: "6",
-    title: "Revolutionary Roads - On The Way",
-    artist: "AiNA THE END",
-    album: "Revolutionary Roads - On The Way",
-    dateAdded: "1 week ago",
-    duration: "3:18",
-    coverUrl:
-      "https://i.scdn.co/image/ab67616d0000b273e860607a724137e739bd2989",
+    name: "Porter Robinson",
+    imageUrl: "https://i.scdn.co/image/ab6761610000f178f67786cf70976b5d87b27b5a",
+    link: "https://open.spotify.com/artist/3dz0NnIZhtKKeXZxLOxCam",
+  },
+  {
+    id: "7",
+    name: "Tiffany Day",
+    imageUrl: "https://i.scdn.co/image/ab6761610000f1781d3b285fae5233fdff9ae2dc",
+    link: "https://open.spotify.com/artist/5D5Qbe1lf3aMnLsPSzXItu",
+  },
+  {
+    id: "8",
+    name: "LE SSERAFIM",
+    imageUrl: "https://i.scdn.co/image/ab6761610000f178d4037f03c5f92e7e6ea89b9e",
+    link: "https://open.spotify.com/artist/4SpbR6yFEvexJuaBpgAU5p",
+  },
+  {
+    id: "9",
+    name: "ILLIT",
+    imageUrl: "https://i.scdn.co/image/ab6761610000f1787fabcc2491d95050faa5b710",
+    link: "https://open.spotify.com/artist/36cgvBn0aadzOijnjjwqMN",
+  },
+  {
+    id: "10",
+    name: "Ninajirachi",
+    imageUrl: "https://i.scdn.co/image/ab6761610000f1786363b3a1630b8811a4d3d718",
+    link: "https://open.spotify.com/artist/3MekbRujJg5VZThubOlrkR",
   },
 ];
 

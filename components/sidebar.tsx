@@ -1,8 +1,8 @@
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Category, likedSongs } from "@/lib/data";
-import { Library, Plus, ArrowRight } from "lucide-react";
+import { Category, likedArtists } from "@/lib/data";
+import { Library, Plus, ArrowRight, Heart } from "lucide-react";
 
 const categorySubtitles: Record<string, string> = {
   projects: "Selected work",
@@ -64,7 +64,7 @@ export function Sidebar({
                 onClick={() => onSelectCategory("liked")}
               >
                 <div className="h-12 w-12 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-md mr-2 flex items-center justify-center flex-shrink-0">
-                  <Library className="h-6 w-6 text-white" />
+                  <Heart className="h-6 w-6 text-white fill-current" />
                 </div>
                 <div className="flex flex-col items-start overflow-hidden">
                   <span className="text-white font-medium truncate w-full">
@@ -72,7 +72,7 @@ export function Sidebar({
                   </span>
                   <span className="text-xs text-zinc-400 flex items-center">
                     <span className="text-green-500 -rotate-45 mr-1">📍</span>{" "}
-                    {likedSongs.length} tracks
+                    {likedArtists.length} artists
                   </span>
                 </div>
               </Button>

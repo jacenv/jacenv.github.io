@@ -1,6 +1,6 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Category, likedSongs } from "@/lib/data";
-import { Library, Plus, ArrowRight, Search, ListFilter } from "lucide-react";
+import { Category, likedArtists } from "@/lib/data";
+import { Plus, ArrowRight, Search, ListFilter, Heart } from "lucide-react";
 
 interface LibraryContentProps {
   categories: Category[];
@@ -56,13 +56,13 @@ export function LibraryContent({ categories, onSelectCategory }: LibraryContentP
             onClick={() => onSelectCategory("liked")}
           >
             <div className="h-16 w-16 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center flex-shrink-0 rounded-sm">
-              <Library className="h-8 w-8 text-white" />
+              <Heart className="h-8 w-8 text-white fill-current" />
             </div>
             <div className="flex flex-col gap-1 overflow-hidden">
               <span className="font-medium truncate text-white text-base">Music I like</span>
               <div className="flex items-center text-zinc-400 text-sm">
                 <span className="text-green-500 -rotate-45 mr-1 text-xs">📌</span>
-                <span>Personal picks • {likedSongs.length} tracks</span>
+                <span>Personal picks • {likedArtists.length} artists</span>
               </div>
             </div>
           </div>

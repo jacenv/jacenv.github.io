@@ -13,9 +13,41 @@ import {
   Repeat1,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 import { Slider } from "@/components/ui/slider";
 import * as React from "react";
+
+// Now-playing artwork: shows the project/artist image when there is one,
+// falling back to the generic label tile.
+function PlayerArtwork({ project }: { project: Project }) {
+  const [error, setError] = React.useState(false);
+
+  // Reset when the track changes so one bad image doesn't blank out the rest
+  React.useEffect(() => {
+    setError(false);
+  }, [project.image]);
+
+  if (project.image && !error) {
+    return (
+      <Image
+        src={project.image}
+        alt={project.title}
+        width={56}
+        height={56}
+        unoptimized
+        className="h-full w-full object-cover"
+        onError={() => setError(true)}
+      />
+    );
+  }
+
+  return (
+    <div className="h-full w-full flex items-center justify-center bg-zinc-800">
+      <span className="text-[10px] font-bold text-white">WORK</span>
+    </div>
+  );
+}
 
 interface BottomPlayerProps {
   project: Project | null;
@@ -155,7 +187,9 @@ export function BottomPlayer({
       {/* Mobile Mini Player */}
       <div className="md:hidden fixed bottom-[84px] left-2 right-2 h-14 bg-[#282828] rounded-md z-50 flex items-center justify-between px-3 shadow-lg" onClick={onPlayPause}>
          <div className="flex items-center gap-3 flex-1 min-w-0">
-            <div className="h-10 w-10 bg-zinc-700 rounded-sm flex-shrink-0"></div>
+            <div className="h-10 w-10 bg-zinc-700 rounded-sm flex-shrink-0 overflow-hidden">
+              <PlayerArtwork project={project} />
+            </div>
             <div className="flex flex-col min-w-0">
                 <span className="text-sm font-bold text-white truncate">{project.title}</span>
                 <span className="text-xs text-zinc-400 truncate">{project.description}</span>
@@ -190,10 +224,7 @@ export function BottomPlayer({
         {/* Left: Project Info */}
         <div className="flex items-center gap-4 w-[30%] min-w-[180px]">
           <div className="h-14 w-14 bg-zinc-800 rounded-sm flex items-center justify-center overflow-hidden relative group cursor-pointer shadow-sm">
-            {/* Placeholder for project image if available, else icon */}
-            <div className="absolute inset-0 flex items-center justify-center bg-zinc-800 text-zinc-400">
-              <span className="text-[10px] font-bold text-white">WORK</span>
-            </div>
+            <PlayerArtwork project={project} />
           </div>
           <div className="flex flex-col justify-center overflow-hidden">
             <span className="text-sm font-medium text-white hover:underline cursor-pointer truncate">
