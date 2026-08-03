@@ -1,7 +1,7 @@
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Play, ExternalLink, Pause, Clock } from "lucide-react"
+import { Play, ExternalLink, Pause } from "lucide-react"
 import { Category, Project } from "@/lib/data"
 import { cn } from "@/lib/utils"
 
@@ -34,14 +34,17 @@ interface MainContentProps {
 export function MainContent({ category, currentProject, isPlaying, onPlay, onNavigateToProjects }: MainContentProps) {
   // Helper to determine headers based on category type or ID
   const getHeaders = () => {
-     if (category.id === 'skills') return ['Category', 'Skills', 'Proficiency']
-     if (category.id === 'contact') return ['Method', 'Details', 'Type']
-     if (category.id === 'interests') return ['Interest', 'Description', 'Type']
-     return ['Title', 'Tech Stack', 'Date']
+     if (category.id === 'skills') return ['Category', 'Skills']
+     if (category.id === 'contact') return ['Method', 'Details']
+     if (category.id === 'interests') return ['Interest', 'About']
+     return ['Project', 'Details']
   }
-  
+
   const headers = getHeaders()
   const isAbout = category.id === "about"
+  const isSkills = category.id === "skills"
+  const isProjects = category.id === "projects"
+  const isContact = category.id === "contact"
 
   const handlePlay = (project: Project) => {
       onPlay(project, category.projects);
@@ -146,81 +149,99 @@ export function MainContent({ category, currentProject, isPlaying, onPlay, onNav
                 {/* Content Section */}
                 <div className="px-4 md:px-6">
                     {category.type === "playlist" && category.projects ? (
+                    /* One readable two-column layout for every section: label on the
+                       left, full content on the right. Long lists wrap instead of
+                       truncating, so nothing gets cut off with an ellipsis. */
                     <div className="pb-10">
-                        <div className="hidden md:grid grid-cols-[16px_4fr_3fr_2fr_minmax(50px,1fr)] gap-4 border-b border-white/10 px-4 py-2 text-sm font-medium text-zinc-400 sticky top-[64px] bg-[#121212] z-10 mb-4">
-                        <div className="text-center">#</div>
-                        <div>{headers[0]}</div>
-                        <div>{headers[1]}</div>
-                        <div>{headers[2]}</div>
-                        <div className="flex justify-end pr-4"><Clock className="h-4 w-4" /></div>
+                        <div className="hidden md:grid grid-cols-[220px_1fr] gap-6 border-b border-white/10 px-4 py-2 text-sm font-medium text-zinc-400 sticky top-[64px] bg-[#121212] z-10 mb-2">
+                            <div>{headers[0]}</div>
+                            <div>{headers[1]}</div>
                         </div>
-                        <div className="space-y-2">
-                        {category.projects.map((project, i) => (
+                        <div className="divide-y divide-white/5">
+                        {category.projects.map((project) => {
+                            const hasLink = Boolean(project.link && project.link !== '#' && !project.link.startsWith('tel:'))
+                            const isCurrent = currentProject?.id === project.id
+                            return (
                             <div
-                            key={project.id}
-                            className="group flex md:grid grid-cols-[16px_4fr_3fr_2fr_minmax(50px,1fr)] gap-3 md:gap-4 rounded-md px-2 md:px-4 py-2 text-sm transition-colors hover:bg-white/10 active:bg-white/10 items-center relative cursor-pointer"
-                            onClick={() => handlePlay(project)}
+                                key={project.id}
+                                className={cn(
+                                    "grid gap-3 md:grid-cols-[220px_1fr] md:gap-6 rounded-md px-2 md:px-4 py-4 transition-colors",
+                                    isProjects && "cursor-pointer hover:bg-white/5"
+                                )}
+                                onClick={isProjects ? () => handlePlay(project) : undefined}
                             >
-                            <div className="font-medium text-zinc-400 group-hover:text-white w-4 hidden md:flex justify-center">
-                                <span className={cn("group-hover:hidden", currentProject?.id === project.id && isPlaying && "text-green-500")}>{i + 1}</span>
-                                <Button
-                                    size="icon"
-                                    variant="ghost"
-                                    className="h-6 w-6 hidden group-hover:flex p-0 hover:bg-transparent text-white"
-                                    onClick={(e) => { e.stopPropagation(); handlePlay(project); }}
-                                >
-                                    {currentProject?.id === project.id && isPlaying ? (
-                                        <Pause className="h-4 w-4 fill-current" />
+                                <div className="flex items-start gap-3">
+                                    <div className="h-9 w-9 bg-zinc-800 rounded flex-shrink-0 flex items-center justify-center">
+                                        <category.icon className="h-4 w-4 text-zinc-500" />
+                                    </div>
+                                    <span className={cn("font-medium leading-tight", isCurrent ? "text-[#1ed760]" : "text-white")}>
+                                        {project.title}
+                                    </span>
+                                </div>
+
+                                <div className="flex flex-col gap-2 min-w-0">
+                                    {isSkills ? (
+                                        <div className="flex flex-wrap items-center gap-2">
+                                            {project.description.split(",").map((skill) => (
+                                                <Badge
+                                                    key={skill}
+                                                    variant="secondary"
+                                                    className="rounded-full bg-zinc-800 px-3 py-1 text-xs font-normal text-zinc-200 hover:bg-zinc-700"
+                                                >
+                                                    {skill.trim()}
+                                                </Badge>
+                                            ))}
+                                        </div>
                                     ) : (
-                                        <Play className="h-4 w-4 fill-current" />
+                                        <>
+                                            <div className="flex items-start justify-between gap-4">
+                                                {isContact && hasLink ? (
+                                                    <a
+                                                        href={project.link}
+                                                        target="_blank"
+                                                        rel="noreferrer"
+                                                        className="text-sm text-zinc-300 hover:text-white hover:underline break-all"
+                                                    >
+                                                        {project.description}
+                                                    </a>
+                                                ) : (
+                                                    <p className="text-sm leading-relaxed text-zinc-300">{project.description}</p>
+                                                )}
+                                                {isProjects && (
+                                                    <div className="flex items-center gap-3 flex-shrink-0">
+                                                        <span className="text-sm text-zinc-400 whitespace-nowrap">{project.date}</span>
+                                                        {hasLink && (
+                                                            <a
+                                                                href={project.link}
+                                                                target="_blank"
+                                                                rel="noreferrer"
+                                                                onClick={(e) => e.stopPropagation()}
+                                                            >
+                                                                <ExternalLink className="h-4 w-4 text-zinc-400 hover:text-white" />
+                                                            </a>
+                                                        )}
+                                                    </div>
+                                                )}
+                                            </div>
+                                            {isProjects && (
+                                                <div className="flex flex-wrap gap-2">
+                                                    {project.tags.map((tag) => (
+                                                        <Badge
+                                                            key={tag}
+                                                            variant="secondary"
+                                                            className="rounded-full bg-zinc-800 px-3 py-1 text-xs font-normal text-zinc-200 hover:bg-zinc-700"
+                                                        >
+                                                            {tag}
+                                                        </Badge>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </>
                                     )}
-                                </Button>
-                            </div>
-                            <div className="flex items-center gap-3 md:gap-4 min-w-0 flex-1 md:flex-none">
-                                {/* Small thumbnail */}
-                                <div className="h-12 w-12 md:h-10 md:w-10 bg-zinc-800 rounded flex-shrink-0 flex items-center justify-center">
-                                    <category.icon className="h-6 w-6 md:h-5 md:w-5 text-zinc-500" />
-                                </div>
-                                <div className="flex flex-col gap-0.5 min-w-0">
-                                    <span className={cn("truncate font-medium text-base", currentProject?.id === project.id ? 'text-[#1ed760]' : 'text-white')}>{project.title}</span>
-                                    {/* Desktop subtitle: artist name for projects, description otherwise */}
-                                    <span className="hidden md:block truncate text-sm text-zinc-400 group-hover:text-white transition-colors cursor-pointer hover:underline">
-                                    {category.id === 'projects' ? 'Jacen Salvador' : project.description}
-                                    </span>
-                                    {/* Mobile subtitle: fold the tags in for projects since there's no column room */}
-                                    <span className="md:hidden truncate text-sm text-zinc-400">
-                                    {category.id === 'projects' ? project.tags.slice(0, 3).join(' · ') : project.description}
-                                    </span>
                                 </div>
                             </div>
-                            <div className="hidden md:flex flex-wrap gap-1 items-center">
-                                {project.tags.slice(0, 3).map((tag) => (
-                                <Badge key={tag} variant="secondary" className="rounded-sm text-[10px] bg-zinc-800 text-zinc-300 hover:bg-zinc-700">
-                                    {tag}
-                                </Badge>
-                                ))}
-                                {project.tags.length > 3 && (
-                                <span className="text-[10px] text-zinc-400">+{project.tags.length - 3}</span>
-                                )}
-                            </div>
-                            <div className="hidden md:block text-zinc-400 text-sm">
-                                {project.date}
-                            </div>
-                            <div className="flex justify-end pr-2 ml-auto md:ml-0 flex-shrink-0">
-                                {project.link && project.link !== '#' && (
-                                <a
-                                    href={project.link}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity p-1"
-                                    onClick={(e) => e.stopPropagation()}
-                                >
-                                    <ExternalLink className="h-4 w-4 text-zinc-400 hover:text-white" />
-                                </a>
-                                )}
-                            </div>
-                            </div>
-                        ))}
+                            )
+                        })}
                         </div>
                     </div>
                     ) : (
