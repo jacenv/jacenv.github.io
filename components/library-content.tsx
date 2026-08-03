@@ -12,7 +12,7 @@ export function LibraryContent({ categories, onSelectCategory }: LibraryContentP
   const playlists = categories.filter((c) => c.type === "playlist");
 
   return (
-    <div className="h-full bg-[#121212] text-white flex flex-col pb-24 pt-8">
+    <div className="h-full bg-[#121212] text-white flex flex-col pt-8">
       <div className="px-4 py-4 sticky top-0 bg-[#121212] z-10">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
@@ -48,8 +48,11 @@ export function LibraryContent({ categories, onSelectCategory }: LibraryContentP
           <ListFilter className="h-4 w-4" />
       </div>
 
-      <ScrollArea className="flex-1 px-4">
-        <div className="space-y-2">
+      {/* min-h-0 lets this flex child shrink below its content height — without it
+          the list never becomes scrollable and the last row gets clipped. */}
+      <ScrollArea className="flex-1 min-h-0 px-4">
+        {/* pb clears the fixed mini player that overlaps the bottom of this area */}
+        <div className="space-y-2 pb-24">
           {/* Liked Songs Item */}
           <div
             className="flex items-center gap-3 p-2 hover:bg-[#2a2a2a] rounded-md cursor-pointer active:bg-black"

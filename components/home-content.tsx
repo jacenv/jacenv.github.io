@@ -1,8 +1,19 @@
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { Category, Project } from "@/lib/data"
 import { Play, Pause } from "lucide-react"
+
+// Distinct gradient per project so the placeholder tiles read as design
+// rather than a missing screenshot.
+const CARD_GRADIENTS = [
+  "from-violet-600 to-indigo-800",
+  "from-emerald-600 to-teal-800",
+  "from-rose-600 to-pink-800",
+  "from-sky-600 to-blue-800",
+  "from-amber-600 to-orange-800",
+]
 
 interface HomeContentProps {
   playlists: Category[]
@@ -56,31 +67,48 @@ export function HomeContent({
                 </div>
             </div>
 
-            {/* Recent Grid Section */}
-            <div className="px-6 mb-8">
-                <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3">
-                    {sidebarPlaylists.slice(0, 8).map((playlist) => (
-                        <div 
-                            key={playlist.id}
-                            className="group flex items-center bg-[#2a2a2a]/60 hover:bg-[#2a2a2a] transition-colors rounded-md overflow-hidden cursor-pointer h-[64px] pr-4 relative"
-                            onClick={() => onSelectCategory(playlist.id)}
+            {/* Intro — the landing view should say who this is before anything else */}
+            <div className="px-6 pb-10">
+                <p className="text-xs font-bold uppercase tracking-widest text-zinc-400">
+                    Portfolio
+                </p>
+                <h1 className="mt-3 text-4xl font-black leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl">
+                    Jacen Salvador
+                </h1>
+                <p className="mt-4 text-lg font-medium text-white">
+                    Full stack developer · San Diego, CA
+                </p>
+                <p className="mt-2 max-w-2xl leading-relaxed text-zinc-400">
+                    Recent computer science grad from San Diego State, now building
+                    mobile apps and websites at mthdstudios.
+                </p>
+                <div className="mt-6 flex flex-wrap gap-3">
+                    <Button
+                        className="bg-[#1ed760] px-6 font-semibold text-black hover:bg-[#16be53]"
+                        onClick={() => onSelectCategory("projects")}
+                    >
+                        View my work
+                    </Button>
+                    <Button
+                        asChild
+                        variant="outline"
+                        className="border-white/30 px-6 font-semibold text-white hover:bg-white/10 hover:text-white"
+                    >
+                        <a href="mailto:jacenvsalvador@gmail.com">Email me</a>
+                    </Button>
+                    <Button
+                        asChild
+                        variant="ghost"
+                        className="px-4 font-semibold text-zinc-300 hover:bg-white/10 hover:text-white"
+                    >
+                        <a
+                            href="https://drive.google.com/file/d/1JbWO4PQmiTf-LC0DDzR0pUldCw9YNRxV/view?usp=sharing"
+                            target="_blank"
+                            rel="noreferrer"
                         >
-                            <div className={`h-full w-[64px] flex items-center justify-center flex-shrink-0 shadow-lg bg-gradient-to-br ${
-                                playlist.id === 'skills' ? 'from-purple-600 to-blue-600' :
-                                playlist.id === 'contact' ? 'from-green-600 to-teal-600' :
-                                playlist.id === 'interests' ? 'from-orange-600 to-red-600' :
-                                'from-blue-600 to-purple-700'
-                            }`}>
-                                <playlist.icon className="h-8 w-8 text-white" />
-                            </div>
-                            <span className="font-bold text-white ml-4 truncate">{playlist.name}</span>
-                            
-                            {/* Play button on hover */}
-                            <div className="absolute right-4 opacity-0 group-hover:opacity-100 transition-opacity shadow-xl rounded-full bg-green-500 p-3 hover:scale-105">
-                                <Play className="h-5 w-5 fill-black text-black pl-0.5" />
-                            </div>
-                        </div>
-                    ))}
+                            Resume
+                        </a>
+                    </Button>
                 </div>
             </div>
 
@@ -97,16 +125,19 @@ export function HomeContent({
                     </button>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-                    {projects.map((project) => (
-                        <div 
-                            key={project.id} 
+                    {projects.map((project, i) => (
+                        <div
+                            key={project.id}
                             className="group bg-[#181818] hover:bg-[#282828] transition-colors p-4 rounded-md cursor-pointer flex flex-col gap-3 relative"
                             onClick={() => onPlay(project, projects)}
                         >
                             <div className="relative aspect-square w-full bg-zinc-800 rounded-md overflow-hidden shadow-lg mb-1">
-                                {/* Placeholder image */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-zinc-700 to-zinc-900 flex items-center justify-center">
-                                     <span className="text-zinc-500 font-bold text-4xl">{project.title.charAt(0)}</span>
+                                {/* Placeholder tile until a real screenshot is dropped in */}
+                                <div className={cn(
+                                    "absolute inset-0 bg-gradient-to-br flex items-center justify-center",
+                                    CARD_GRADIENTS[i % CARD_GRADIENTS.length]
+                                )}>
+                                     <span className="text-white/90 font-black text-4xl">{project.title.charAt(0)}</span>
                                 </div>
                                 {/* Play button overlay */}
                                 <div className={cn(
@@ -120,11 +151,22 @@ export function HomeContent({
                                     )}
                                 </div>
                             </div>
-                            <div className="flex flex-col gap-1 min-h-[60px]">
-                                <strong className="text-white font-bold truncate">{project.title}</strong>
-                                <p className="text-zinc-400 text-sm line-clamp-2 leading-tight">
+                            <div className="flex flex-col gap-2">
+                                <strong className="text-white font-bold leading-snug">{project.title}</strong>
+                                <p className="text-zinc-400 text-sm leading-snug">
                                     {project.description}
                                 </p>
+                                <div className="flex flex-wrap gap-1.5 pt-1">
+                                    {project.tags.slice(0, 3).map((tag) => (
+                                        <Badge
+                                            key={tag}
+                                            variant="secondary"
+                                            className="rounded-full bg-zinc-800 px-2.5 py-0.5 text-[10px] font-normal text-zinc-300"
+                                        >
+                                            {tag}
+                                        </Badge>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     ))}
@@ -162,9 +204,9 @@ export function HomeContent({
                                 </div>
                              </div>
                              <div className="flex flex-col gap-1">
-                                 <strong className="text-white font-bold truncate">{playlist.name}</strong>
-                                 <p className="text-zinc-400 text-sm line-clamp-2 leading-tight">
-                                     {playlist.description || "Jacen Salvador"}
+                                 <strong className="text-white font-bold leading-snug">{playlist.name}</strong>
+                                 <p className="text-zinc-400 text-sm leading-snug">
+                                     {playlist.description}
                                  </p>
                              </div>
                          </div>
