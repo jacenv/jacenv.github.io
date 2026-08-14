@@ -1,20 +1,20 @@
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Category, likedArtists } from "@/lib/data";
-import { Library, Plus, ArrowRight, Heart } from "lucide-react";
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { Category, likedArtists } from "@/lib/data"
+import { Heart, Library, Radio } from "lucide-react"
 
 const categorySubtitles: Record<string, string> = {
-  projects: "Selected work",
-  skills: "Tools & technologies",
-  contact: "Get in touch",
-  interests: "Beyond code",
-};
+  projects: "Products and client work",
+  skills: "Tools and technologies",
+  contact: "Start a conversation",
+  interests: "Beyond engineering",
+}
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
-  categories: Category[];
-  selectedCategoryId: string;
-  onSelectCategory: (id: string) => void;
+  categories: Category[]
+  selectedCategoryId: string
+  onSelectCategory: (id: string) => void
 }
 
 export function Sidebar({
@@ -23,94 +23,74 @@ export function Sidebar({
   selectedCategoryId,
   onSelectCategory,
 }: SidebarProps) {
-  // Filter out "About Me" because it's accessed via profile
-  const sidebarPlaylists = categories.filter((c) => c.type === "playlist");
+  const sidebarPlaylists = categories.filter((category) => category.type === "playlist")
 
   return (
-    <div className={cn("pb-12 h-full bg-[#121212] text-zinc-400", className)}>
-      <div className="space-y-4 py-4 h-full flex flex-col">
-        <div className="py-2 flex-1 flex flex-col bg-[#121212] rounded-lg mx-2">
-          <div className="px-4 pt-4 flex items-center justify-between">
-            <Button
-              variant="ghost"
-              className="justify-start text-left font-bold text-zinc-400 hover:text-white hover:bg-transparent pl-0 text-base group"
-            >
-              <Library className="mr-2 h-6 w-6 group-hover:text-white transition-colors" />
-              Explore
-            </Button>
-            <div className="flex items-center gap-2">
-              <Plus className="h-5 w-5 text-zinc-400 hover:text-white cursor-pointer transition-colors" />
-              <ArrowRight className="h-5 w-5 text-zinc-400 hover:text-white cursor-pointer transition-colors" />
-            </div>
+    <aside className={cn("h-full bg-black p-2 text-zinc-400", className)}>
+      <div className="flex h-full flex-col overflow-hidden rounded-xl border border-white/5 bg-[#101010]">
+        <div className="border-b border-white/5 px-4 py-5">
+          <div className="flex items-center gap-2 text-sm font-bold text-white">
+            <Library className="h-5 w-5 text-[#1ed760]" />
+            Portfolio library
           </div>
+          <p className="mt-2 text-xs leading-relaxed text-zinc-500">A curated view of my work, capabilities, and interests.</p>
+        </div>
 
-          <div className="px-4 py-2 flex gap-2 overflow-x-auto no-scrollbar">
-            <span className="px-3 py-1 bg-[#2a2a2a] rounded-full text-sm text-white cursor-pointer hover:bg-[#3a3a3a] transition-colors whitespace-nowrap">
-              Sections
-            </span>
-            <span className="px-3 py-1 bg-[#2a2a2a] rounded-full text-sm text-white cursor-pointer hover:bg-[#3a3a3a] transition-colors whitespace-nowrap">
-              Work
-            </span>
-          </div>
-
-          <ScrollArea className="flex-1 px-2">
-            <div className="space-y-1 p-2">
+        <ScrollArea className="min-h-0 flex-1 px-2 py-3">
+          <div className="space-y-1">
+            {sidebarPlaylists.map((category) => (
               <Button
+                key={category.id}
                 variant="ghost"
                 className={cn(
-                  "w-full justify-start text-left font-normal text-zinc-400 hover:text-white hover:bg-[#1a1a1a] h-16 px-2",
-                  selectedCategoryId === "liked" && "bg-[#1a1a1a] text-white"
+                  "h-auto w-full justify-start rounded-xl px-2 py-2.5 text-left font-normal text-zinc-400 hover:bg-white/[0.06] hover:text-white",
+                  selectedCategoryId === category.id && "bg-white/[0.07] text-white",
                 )}
-                onClick={() => onSelectCategory("liked")}
+                onClick={() => onSelectCategory(category.id)}
               >
-                <div className="h-12 w-12 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-md mr-2 flex items-center justify-center flex-shrink-0">
-                  <Heart className="h-6 w-6 text-white fill-current" />
-                </div>
-                <div className="flex flex-col items-start overflow-hidden">
-                  <span className="text-white font-medium truncate w-full">
-                    Music I like
-                  </span>
-                  <span className="text-xs text-zinc-400 flex items-center">
-                    <span className="text-green-500 -rotate-45 mr-1">📍</span>{" "}
-                    {likedArtists.length} artists
-                  </span>
-                </div>
+                <span className={cn(
+                  "mr-3 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/[0.06]",
+                  selectedCategoryId === category.id && "bg-[#1ed760] text-black",
+                )}>
+                  <category.icon className="h-5 w-5" />
+                </span>
+                <span className="min-w-0">
+                  <span className="block truncate text-sm font-semibold text-white">{category.name}</span>
+                  <span className="mt-1 block truncate text-xs text-zinc-500">{categorySubtitles[category.id]}</span>
+                </span>
               </Button>
-              {sidebarPlaylists.map((category) => (
-                <Button
-                  key={category.id}
-                  variant="ghost"
-                  className={cn(
-                    "w-full justify-start text-left font-normal text-zinc-400 hover:text-white hover:bg-[#1a1a1a] h-16 px-2",
-                    selectedCategoryId === category.id &&
-                      "bg-[#1a1a1a] text-white"
-                  )}
-                  onClick={() => onSelectCategory(category.id)}
-                >
-                  <div className="h-12 w-12 bg-[#282828] rounded-md mr-2 flex items-center justify-center flex-shrink-0">
-                    <category.icon className="h-6 w-6 text-zinc-400" />
-                  </div>
-                  <div className="flex flex-col items-start overflow-hidden">
-                    <span
-                      className={cn(
-                        "font-medium truncate w-full",
-                        selectedCategoryId === category.id
-                          ? "text-green-500"
-                          : "text-white"
-                      )}
-                    >
-                      {category.name}
-                    </span>
-                    <span className="text-xs text-zinc-400">
-                      {categorySubtitles[category.id] || "Portfolio section"}
-                    </span>
-                  </div>
-                </Button>
-              ))}
-            </div>
-          </ScrollArea>
+            ))}
+
+            <div className="mx-2 my-3 h-px bg-white/5" />
+
+            <Button
+              variant="ghost"
+              className={cn(
+                "h-auto w-full justify-start rounded-xl px-2 py-2.5 text-left font-normal text-zinc-400 hover:bg-white/[0.06] hover:text-white",
+                selectedCategoryId === "liked" && "bg-white/[0.07] text-white",
+              )}
+              onClick={() => onSelectCategory("liked")}
+            >
+              <span className="mr-3 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 text-white">
+                <Heart className="h-5 w-5 fill-current" />
+              </span>
+              <span className="min-w-0">
+                <span className="block truncate text-sm font-semibold text-white">Music I like</span>
+                <span className="mt-1 flex items-center gap-1 truncate text-xs text-zinc-500">
+                  <Radio className="h-3 w-3" /> {likedArtists.length} favorite artists
+                </span>
+              </span>
+            </Button>
+          </div>
+        </ScrollArea>
+
+        <div className="border-t border-white/5 p-4">
+          <p className="text-xs font-medium text-zinc-500">Available for thoughtful product and engineering conversations.</p>
+          <a href="mailto:jacenvsalvador@gmail.com" className="mt-2 inline-block text-sm font-semibold text-[#63e58f] hover:text-[#8cf1ad]">
+            Get in touch ↗
+          </a>
         </div>
       </div>
-    </div>
-  );
+    </aside>
+  )
 }

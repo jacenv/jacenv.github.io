@@ -9,15 +9,15 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
   const [isFading, setIsFading] = useState(false);
 
   useEffect(() => {
-    // Start fading out after 2 seconds
+    // Keep the brand moment brief so it never gets between a visitor and the work.
     const timer = setTimeout(() => {
       setIsFading(true);
-    }, 2000);
+    }, 650);
 
     // Call onComplete after transition finishes (e.g. 500ms fade)
     const completeTimer = setTimeout(() => {
       onComplete();
-    }, 2500);
+    }, 1000);
 
     return () => {
       clearTimeout(timer);
@@ -32,15 +32,17 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
         isFading ? "opacity-0" : "opacity-100"
       )}
     >
-      <div className="text-center space-y-4 animate-pulse">
-        <h1 className="text-4xl md:text-6xl font-bold text-white tracking-tighter">
-          hi, i&apos;m jacen
+      <div className="text-center space-y-3">
+        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[#1ed760] text-lg font-black tracking-tight text-black">
+          JS
+        </div>
+        <h1 className="text-2xl font-bold tracking-tight text-white md:text-3xl">
+          Jacen Salvador
         </h1>
-        <p className="text-zinc-400 text-lg md:text-xl">
-          welcome to my portfolio
+        <p className="text-sm text-zinc-500 md:text-base">
+          Product engineering, end to end.
         </p>
       </div>
     </div>
   );
 }
-

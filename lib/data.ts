@@ -23,66 +23,61 @@ export type Category = {
 
 export const statusProject: Project = {
   id: "status-1",
-  title: "Currently building",
-  description: "mthdstudios • mobile and web applications",
-  tags: ["Now building"],
+  title: "mthdstudios",
+  description: "mthdstudios • consumer iOS products and production websites",
+  tags: ["Co-founder", "Shipping now"],
   date: "Now",
   link: "mailto:jacenvsalvador@gmail.com",
 };
 
 export const projectsData: Project[] = [
   {
-    id: "proj-5",
-    title: "Persistent Reminder Bot",
-    description: "Discord bot that pings you until tasks are completed.",
+    id: "yearning",
+    title: "Yearning",
+    description: "AI conversation simulator published on the iOS App Store.",
     longDescription:
-      "A persistent Discord reminder bot that pings you at regular intervals for tasks. It won't stop notifying you until you mark the task as complete using the '!done' command. Built with Python and discord.py.",
-    tags: ["Python", "discord.py", "Bot"],
-    link: "https://github.com/jacenv/PersistentReminder",
-    date: "Jan 2026",
+      "Built a hardened LLM boundary that validates every client-controlled prompt input before a billed model call. Designed 12 layered rate-limit buckets and integrated DeepSeek through the Vercel AI SDK with Zod-validated replies and coaching guidance.",
+    tags: ["Expo", "Convex", "DeepSeek", "Cloudflare", "RevenueCat"],
+    link: "https://apps.apple.com/us/app/yearning/id6778991849",
+    date: "Jun 2026 — Present",
   },
   {
-    id: "proj-1",
-    title: "GoodMacros - Nutrition Finder App",
-    description:
-      "Cross-platform nutrition app ranking foods by custom metrics.",
+    id: "larp",
+    title: "Larp",
+    description: "AI photo and video editor published on the iOS App Store.",
     longDescription:
-      "Built a cross-platform nutrition app that ranks foods by a custom metric, helping users find high-protein, low-calorie items. Implemented barcode scanning for instant food lookups and caching results in Convex reducing excessive API calls. Developed goal-based grading logic to personalize nutrition scores.",
-    tags: ["Expo", "React Native", "Next.js", "Convex"],
-    link: "#", // User didn't provide link
-    date: "Oct 2025",
+      "Architected a Turborepo monorepo and a three-tier content catalog backed by nine composite indexes. Orchestrated image and video generation on fal.ai with server-side entitlements, token-bucket limits, and RevenueCat credits.",
+    tags: ["Expo", "Next.js", "Convex", "fal.ai", "Turborepo"],
+    link: "https://apps.apple.com/us/app/larp-ai-photo-editor/id6758196527",
+    date: "Jan — May 2026",
   },
   {
-    id: "proj-2",
-    title: "CatifyAI - Cat Selfie Image Generator",
-    description:
-      "Mobile app transforming user photos into stylized cat selfies.",
+    id: "studio-avenue",
+    title: "Studio Avenue",
+    description: "Editorial portfolio for an award-winning post-production studio.",
     longDescription:
-      "Built a mobile app that transforms user photos into 1024x1024 HD, stylized 'cat selfies' using OpenAI image generation. Implemented a credit-based monetization system with RevenueCat. Built backend functions in Convex for image processing orchestration.",
-    tags: ["React Native", "OpenAI", "Convex", "RevenueCat"],
-    link: "#",
-    date: "Aug 2025",
+      "Built studioavenue.co for a post-production studio with work for Marc Jacobs, the Golden State Warriors, and BLACKPINK. Sanity powers a streamlined publishing workflow for the studio team.",
+    tags: ["Next.js", "Sanity", "Client work"],
+    link: "https://studioavenue.co",
+    date: "Client work",
   },
   {
-    id: "proj-4",
+    id: "polarity-visions",
+    title: "PolarityVisions",
+    description: "Data-rich creative portfolio with a type-safe application layer.",
+    longDescription:
+      "Modeled many-to-many media and partner relationships in MySQL with Drizzle ORM, then exposed them through a type-safe tRPC API for a polished creative portfolio experience.",
+    tags: ["Next.js", "tRPC", "Drizzle ORM", "MySQL"],
+    date: "Client work",
+  },
+  {
+    id: "systems-cloud-lab",
     title: "Systems & Cloud Lab",
-    description: "Infrastructure Deployment Projects on multi-OS environments.",
+    description: "Fault-tolerant infrastructure across cloud and UNIX environments.",
     longDescription:
-      "Deployed multi-OS environments using OpenBSD, FreeBSD, Rocky Linux, and others. Built and maintained cloud and containerized systems with Docker, NGINX, Kubernetes, and Azure. Implemented secure, version-controlled infrastructures.",
-    tags: ["Kubernetes", "Docker", "Azure", "Unix"],
-    link: "#",
-    date: "May 2025",
-  },
-  {
-    id: "proj-3",
-    title: "Trauvo - Travel Planner",
-    description:
-      "Monorepo architecture with shared backend for travel planning.",
-    longDescription:
-      "Architecting a monorepo with shared backend and web/mobile apps using Convex functions for real-time data. Implementing cross-platform maps and device integrations using Expo APIs for location and notifications.",
-    tags: ["React Native", "Next.js", "Convex", "Stripe"],
-    link: "#",
-    date: "In Progress",
+      "Deployed OpenBSD, Ubuntu, Solaris, and AIX systems on Proxmox with cross-system networking and DNS. Built containerized services with Docker and Kubernetes on Azure, backed by NFS and self-managed GitLab.",
+    tags: ["Kubernetes", "Docker", "Azure", "Proxmox", "NGINX"],
+    date: "Jan — May 2025",
   },
 ];
 
@@ -90,37 +85,30 @@ export const skillsData: Project[] = [
   {
     id: "skill-1",
     title: "Programming Languages",
-    description: "Python, JavaScript, TypeScript, Java, C++, R",
+    description: "TypeScript, JavaScript, Python, SQL, Java, C/C++",
     tags: ["Languages"],
     date: "Current",
   },
   {
     id: "skill-2",
-    title: "Frameworks & Tools",
+    title: "Product Engineering",
     description:
-      "React Native, React.js, Node.js, Convex, Supabase, Firebase, Git, Expo, Tailwind CSS",
+      "React, React Native (Expo), Next.js, Node.js, tRPC, TailwindCSS, Sanity",
     tags: ["Frameworks"],
     date: "Current",
   },
   {
     id: "skill-3",
-    title: "Technologies & APIs",
-    description: "OpenAI, WebSockets, In-App Purchases, Convex Functions",
+    title: "AI & Backend",
+    description: "Vercel AI SDK, DeepSeek, fal.ai, Convex, Drizzle ORM, Zod, MySQL",
     tags: ["Tech"],
     date: "Current",
   },
   {
     id: "skill-4",
     title: "Infrastructure & Platforms",
-    description: "Kubernetes, Docker, Azure, Proxmox VE, NGINX",
+    description: "Cloudflare Workers/R2, Docker, Kubernetes, Azure, Turborepo, CI/CD, Git",
     tags: ["Infrastructure"],
-    date: "Current",
-  },
-  {
-    id: "skill-5",
-    title: "Operating Systems",
-    description: "Windows, MacOS, OpenBSD, FreeBSD, Ubuntu, Solaris, AIX",
-    tags: ["OS"],
     date: "Current",
   },
 ];
@@ -152,11 +140,10 @@ export const contactData: Project[] = [
   },
   {
     id: "contact-4",
-    title: "Phone",
-    description: "email first :)",
-    tags: ["Mobile"],
-    link: "tel:check the email",
-    date: "Call",
+    title: "Location",
+    description: "San Diego, California",
+    tags: ["Based in"],
+    date: "Pacific time",
   },
 ];
 
@@ -277,7 +264,7 @@ export const sidebarData: Category[] = [
     name: "My Projects",
     icon: Layers,
     type: "playlist",
-    description: "projects that i have worked on",
+    description: "Selected products, client work, and systems projects",
     projects: projectsData,
   },
   {
@@ -285,7 +272,7 @@ export const sidebarData: Category[] = [
     name: "Skills / Tech Stack",
     icon: Code,
     type: "playlist",
-    description: "technical skills and tools that i have used",
+    description: "Languages, frameworks, backend, and infrastructure",
     projects: skillsData,
   },
   {
@@ -293,7 +280,7 @@ export const sidebarData: Category[] = [
     name: "Contact",
     icon: Mail,
     type: "playlist",
-    description: "get in contact with me!",
+    description: "Email, LinkedIn, GitHub, and location",
     projects: contactData,
   },
   {
@@ -301,7 +288,7 @@ export const sidebarData: Category[] = [
     name: "Outside Interests",
     icon: Globe,
     type: "playlist",
-    description: "what i like to do outside of coding",
+    description: "A few things I enjoy beyond software",
     projects: interestsData,
   },
   {
@@ -310,27 +297,40 @@ export const sidebarData: Category[] = [
     icon: User,
     type: "about",
     content: JSON.stringify({
-      bio: "hi im jacen! i am a recent college graduate at san diego state university with a bachelors in computer science! i am currently building mthdstudios, building fullstack mobile apps as well as frontend web work. come explore my portfolio to learn more about me!",
+      bio: "I am a full-stack software engineer and co-founder based in San Diego. I ship consumer iOS products and production websites end to end - from product architecture and AI integrations to release pipelines, observability, and deployment.",
+      stats: [
+        { value: "2", label: "consumer iOS apps shipped" },
+        { value: "3+ yrs", label: "building for clients" },
+        { value: "B.S.", label: "computer science, SDSU" }
+      ],
       education: {
         school: "San Diego State University",
-        degree: "Computer Science, B.S. in Applied Arts and Sciences",
-        year: "Graduated May 2026"
+        degree: "Bachelor of Applied Arts and Sciences in Computer Science",
+        year: "Graduated June 2026"
       },
       experience: [
         {
-          role: "Cofounder",
+          role: "Co-Founder & Software Engineer",
           company: "mthdstudios",
-          duration: "April 2026 - Present",
-          description: "Building mobile apps and websites as a service to clients."
+          duration: "Jan 2025 - Present",
+          description: "Co-founded a two-person software studio and shipped two consumer iOS apps to the App Store.",
+          highlights: [
+            "Own the release lifecycle across EAS builds, App Store submissions, over-the-air updates, and Sentry crash triage.",
+            "Built and deployed the studio marketing site and product pages with Next.js and Cloudflare."
+          ]
         },
         {
-          role: "Full Stack Developer",
-          company: "Freelance",
-          duration: "2023 - Present",
-          description: "Developing mobile apps along with websites for multiple clients."
+          role: "Client Web Developer",
+          company: "Studio Avenue & PolarityVisions",
+          duration: "Dec 2023 - Jul 2026",
+          description: "Delivered production portfolios for creative teams with polished editorial workflows and type-safe data architecture.",
+          highlights: [
+            "Built Studio Avenue's Sanity-powered site for a team with Marc Jacobs, Golden State Warriors, and BLACKPINK credits.",
+            "Modeled PolarityVisions' media and partner data in MySQL with Drizzle ORM behind a tRPC API."
+          ]
         }
       ],
-      cta: "Anything else you want to know (resume, projects, etc.)? Send an email!"
+      cta: "Have a product, engineering role, or collaboration in mind? I would be glad to hear about it."
     }),
   },
 ];

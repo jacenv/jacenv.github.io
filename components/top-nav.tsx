@@ -1,14 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { ChevronLeft, ChevronRight, User, Home, Search } from "lucide-react"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+import { ArrowUpRight, Download, Home, User } from "lucide-react"
 
 interface TopNavProps {
   onNavigateToAbout: () => void
@@ -17,87 +8,38 @@ interface TopNavProps {
 
 export function TopNav({ onNavigateToAbout, onNavigateHome }: TopNavProps) {
   return (
-    <div className="flex w-full items-center justify-between bg-black px-4 py-2 h-[64px] min-h-[64px]">
-      <div className="flex gap-2 items-center flex-1">
-        <div className="flex gap-2 mr-2">
-            <Button size="icon" className="rounded-full bg-black text-zinc-400 hover:text-white h-8 w-8" disabled>
-            <ChevronLeft className="h-6 w-6" />
-            </Button>
-            <Button size="icon" className="rounded-full bg-black text-zinc-400 hover:text-white h-8 w-8" disabled>
-            <ChevronRight className="h-6 w-6" />
-            </Button>
-        </div>
-        
-        <Button 
-            size="icon" 
-            className="rounded-full bg-[#1f1f1f] text-white hover:scale-105 transition-transform h-12 w-12 flex-shrink-0"
-            onClick={onNavigateHome}
-        >
-            <Home className="h-6 w-6" />
+    <nav className="flex h-16 min-h-16 w-full items-center justify-between border-b border-white/5 bg-black px-4" aria-label="Primary navigation">
+      <button type="button" onClick={onNavigateHome} className="group flex items-center gap-3 text-left">
+        <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#1ed760] text-sm font-black tracking-tight text-black transition-transform group-hover:scale-105">
+          JS
+        </span>
+        <span className="hidden sm:block">
+          <span className="block text-sm font-bold leading-none text-white">Jacen Salvador</span>
+          <span className="mt-1 block text-xs text-zinc-500">Software engineer</span>
+        </span>
+      </button>
+
+      <div className="flex items-center gap-1">
+        <Button variant="ghost" className="rounded-full text-zinc-300 hover:bg-white/8 hover:text-white" onClick={onNavigateHome}>
+          <Home className="mr-2 h-4 w-4" />
+          Overview
         </Button>
-
-        <div className="relative group flex-1 max-w-[480px]">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-zinc-400 group-focus-within:text-white pointer-events-none" />
-            <input 
-                type="text"
-                placeholder="Search my portfolio"
-                className="pl-10 pr-12 h-12 rounded-full bg-[#1f1f1f] border-0 text-white placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-white/20 w-full hover:bg-[#2a2a2a] transition-colors font-medium truncate" 
-            />
-            <div className="absolute right-3 top-1/2 -translate-y-1/2 border-l border-zinc-600 pl-3 h-6 flex items-center">
-                 <Library className="h-5 w-5 text-zinc-400 hover:text-white cursor-pointer" />
-            </div>
-       </div>
-
+        <Button variant="ghost" className="rounded-full text-zinc-300 hover:bg-white/8 hover:text-white" onClick={onNavigateToAbout}>
+          <User className="mr-2 h-4 w-4" />
+          About
+        </Button>
+        <Button asChild variant="ghost" className="hidden rounded-full text-zinc-300 hover:bg-white/8 hover:text-white lg:flex">
+          <a href="https://github.com/jacenv" target="_blank" rel="noreferrer">
+            GitHub <ArrowUpRight className="ml-2 h-4 w-4" />
+          </a>
+        </Button>
+        <Button asChild className="ml-1 rounded-full bg-white px-4 font-bold text-black hover:bg-zinc-200">
+          <a href="/jacen-resume.pdf" target="_blank" rel="noreferrer">
+            <Download className="mr-2 h-4 w-4" />
+            Resume
+          </a>
+        </Button>
       </div>
-      <div className="flex items-center gap-4">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="relative h-10 w-10 rounded-full p-0 hover:scale-105 transition-transform">
-              <Avatar className="h-10 w-10">
-                <AvatarImage src="/placeholder-user.jpg" alt="User" />
-                <AvatarFallback className="bg-[#1f1f1f] text-white font-bold">JS</AvatarFallback>
-              </Avatar>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56 bg-[#282828] border-black text-white" align="end" forceMount>
-            <DropdownMenuLabel className="font-normal">
-              <div className="flex flex-col space-y-1">
-                <p className="text-sm font-medium leading-none">Jacen Salvador</p>
-                <p className="text-xs leading-none text-zinc-400">
-                  View Profile
-                </p>
-              </div>
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator className="bg-zinc-700" />
-            <DropdownMenuItem onClick={onNavigateToAbout} className="focus:bg-zinc-700 focus:text-white cursor-pointer">
-              <User className="mr-2 h-4 w-4" />
-              <span>Profile</span>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
-    </div>
+    </nav>
   )
-}
-
-function Library(props: React.SVGProps<SVGSVGElement>) {
-    return (
-        <svg
-        {...props}
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        >
-        <path d="m16 6 4 14" />
-        <path d="M12 6v14" />
-        <path d="M8 8v12" />
-        <path d="M4 4v16" />
-        </svg>
-    )
 }

@@ -13,8 +13,23 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "jacen - mthdstudios",
-  description: "jacen's portfolio spotify style :)",
+  title: "Jacen Salvador | Full-Stack Software Engineer",
+  description:
+    "Portfolio of Jacen Salvador, a San Diego-based software engineer building consumer iOS products, AI experiences, and production websites.",
+  keywords: [
+    "Jacen Salvador",
+    "software engineer",
+    "full-stack developer",
+    "React Native",
+    "Next.js",
+    "San Diego",
+  ],
+  authors: [{ name: "Jacen Salvador" }],
+  openGraph: {
+    title: "Jacen Salvador | Full-Stack Software Engineer",
+    description: "Consumer iOS products, AI experiences, and production websites - built end to end.",
+    type: "website",
+  },
 };
 
 // viewportFit: "cover" is what makes env(safe-area-inset-*) resolve to real

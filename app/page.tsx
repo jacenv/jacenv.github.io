@@ -21,11 +21,10 @@ export default function SpotifyPage() {
   const [isMounted, setIsMounted] = React.useState(false);
   const [showSplash, setShowSplash] = React.useState(true);
 
-  // Default to 'about' view
-  const [selectedCategoryId, setSelectedCategoryId] = React.useState("about");
+  const [selectedCategoryId, setSelectedCategoryId] = React.useState("home");
   
   // Mobile Tab State
-  const [mobileTab, setMobileTab] = React.useState<"home" | "library" | "profile">("profile");
+  const [mobileTab, setMobileTab] = React.useState<"home" | "library" | "profile">("home");
 
   const [currentProject, setCurrentProject] = React.useState<Project | null>(
     statusProject
