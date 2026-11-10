@@ -1,36 +1,27 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Jacen Salvador — personal portfolio
 
-## Getting Started
+An editorial portfolio for a new-grad software engineer. Built with Next.js and TypeScript, with a static export for GitHub Pages.
 
-First, run the development server:
+## Local development
 
-```bash
+```sh
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000. Typefaces (DM Sans, DM Mono, Instrument Serif) are pulled in through `next/font` and self-hosted in the build, so the published site makes no external font or image requests.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Content
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `app/page.tsx`: introduction, selected work, smaller projects, about, and contact.
+- `lib/data.ts`: project descriptions, technology lists, and external links.
+- `app/globals.css`: responsive layout, typography, colors, and focus states.
+- `public/jacen-resume.pdf`: downloadable resume, synced with the resume supplied for this redesign.
 
-## Learn More
+## Production
 
-To learn more about Next.js, take a look at the following resources:
+```sh
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The static site is written to `out/`. Existing domain configuration is retained in `CNAME`.

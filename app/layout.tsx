@@ -1,58 +1,53 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { DM_Sans, DM_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const sans = DM_Sans({
   subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const mono = DM_Mono({
   subsets: ["latin"],
+  weight: ["300", "400", "500"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
+const serif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-serif",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Jacen Salvador | Full-Stack Software Engineer",
+  title: "Jacen Salvador — Software Engineer",
   description:
-    "Portfolio of Jacen Salvador, a San Diego-based software engineer building consumer iOS products, AI experiences, and production websites.",
-  keywords: [
-    "Jacen Salvador",
-    "software engineer",
-    "full-stack developer",
-    "React Native",
-    "Next.js",
-    "San Diego",
-  ],
+    "Software engineer and SDSU Computer Science graduate in San Diego. Mobile products, full-stack client work, and systems explorations.",
   authors: [{ name: "Jacen Salvador" }],
   openGraph: {
-    title: "Jacen Salvador | Full-Stack Software Engineer",
-    description: "Consumer iOS products, AI experiences, and production websites - built end to end.",
+    title: "Jacen Salvador — Software Engineer",
+    description:
+      "I build for curiosity. Mobile products, client websites, and engineering explorations.",
     type: "website",
   },
 };
 
-// viewportFit: "cover" is what makes env(safe-area-inset-*) resolve to real
-// values on iPhone — without it they are always 0 and the bottom bars sit
-// underneath the home indicator.
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  viewportFit: "cover",
+  themeColor: "#e7e6e1",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+    <html lang="en" className={`${sans.variable} ${mono.variable} ${serif.variable}`}>
+      <body>{children}</body>
     </html>
   );
 }
